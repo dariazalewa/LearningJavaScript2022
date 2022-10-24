@@ -18,7 +18,7 @@ body {
     flex-wrap: wrap;
 }
 
-.cell {
+.square {
     width: 150px;
     height: 150px;
     border-width: 10px;
