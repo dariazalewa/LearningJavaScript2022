@@ -1,0 +1,46 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgb(151, 158, 180);
+}
+.board {
+    width: 450px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cell {
+    width: 150px;
+    height: 150px;
+    border-width: 10px;
+    border-style: outset;
+    border-color: royalblue;
+    overflow: hidden;
+}
+
+.mole {
+    width: 150px;
+    height: 150px;
+    background-image: url('molee.png');
+    background-size: contain;
+    animation: appear 0.10s;
+}
+
+@keyframes appear {
+    0% {
+        transform: translateY(150px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
