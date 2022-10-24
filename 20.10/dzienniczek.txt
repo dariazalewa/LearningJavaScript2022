@@ -1,0 +1,2 @@
+Utworzenie strony internetowej w języku HTML połączonej z plikiem zewnętrznym JavaScript, aby utworzyć grę, aby zgadnąć liczbę.
+godz. 8-15
