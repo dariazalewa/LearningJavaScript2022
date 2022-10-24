@@ -34,13 +34,3 @@ body {
     background-size: contain;
     animation: appear 0.10s;
 }
-
-@keyframes appear {
-    0% {
-        transform: translateY(150px);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
-}
