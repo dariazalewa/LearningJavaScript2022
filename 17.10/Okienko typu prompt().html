@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Okienko typu prompt().</title>
+    </head>
+    <body>
+        <script>
+            const name = prompt("Podaj swoje imię:");
+            if (name) {
+                alert("Witaj " + name);} 
+            else {
+                alert("Anulowałeś akcję, a okienko zwróciło " + name);}
+            document.write("Do funkcji prompt przekazujemy dwa parametry - jeden jest treścią, która będzie wyświetlana w okienku, a drugi jest domyślną wartością, która będzie wyświetlana w polu, w które wpisujemy tekst.<br> Jeżeli użytkownik kliknie [ANULUJ], zostanie zwrócona wartość null, w przeciwnym razie zostanie zwrócona wartość wpisana w pole okienka.")
+        </script>
+    </body>
+</html>

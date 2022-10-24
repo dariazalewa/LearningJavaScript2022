@@ -1,0 +1,1 @@
+document.write("<h2>Skrypt w pliku zewnetrznym.</h2>");
