@@ -7,6 +7,24 @@ const ball = {
     radius : 10,
     velocityX : 5,
     velocityY : 5,
-    speed : 7,
-    color : "WHITE"
+    speed : 6,
+    color : "Pink"
+}
+
+const user = {
+    x : 0,
+    y : (canvas.height - 100)/2,
+    width : 8,
+    height : 100,
+    score : 0,
+    color : "Blue"
+}
+
+const computer = {
+    x : canvas.width - 10,
+    y : (canvas.height - 100)/2,
+    width : 8,
+    height : 100,
+    score : 0,
+    color : "Red"
 }
