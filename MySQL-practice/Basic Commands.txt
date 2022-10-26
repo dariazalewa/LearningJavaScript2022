@@ -36,14 +36,18 @@
 >  ALTER TABLE nazwa_tabeli
 🠒  DROP COLUMN nazwa_kolumny;
 
-11. Zmienia nazwę tabeli:
+11. Zmiana nazwy kolumny w tabeli:
+> alter table nazwa_tabeli
+🠒 rename column stara_nazwa_kolumny to nowa_nazwa_kolumny;
+
+12. Zmienia nazwę tabeli:
 > Alter table nazwa_tabeli
 🠒 Rename as nowa_nazwa_tabeli;
 
-12. Usuwa tabelę w bazie danych:
+13. Usuwa tabelę w bazie danych:
 >  Drop table nazwa_tabeli;
 
-13. Usuwa bazę danych:
+14. Usuwa bazę danych:
 > Drop database nazwa_bazy;
 
 

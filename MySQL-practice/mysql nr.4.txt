@@ -1,18 +1,92 @@
 1.	Policz klientów z bazy danych księgarnia.
-2.	Policz tytuły książek wydanych powyżej 2000 roku. 
+mysql> select count(nazwisko) as Podlicz
+    -> from klient;
+
+2.	Policz tytuły książek wydanych powyżej 2000 roku.
+mysql> select count(tytul) as Podlicz
+    -> from ksiazki
+    -> where rok_wydania>2000;
+
 3.	Wyświetl różnicę między ceną maksymalną i minimalną książki.
+ mysql> select max(cena)-min(cena)
+    -> from ksiazki;
+
 4.	Oblicz marżę narzuconą na książki (7% ceny książki).
+mysql> select tytul,cena,cena*0.07
+    -> from ksiazki;
+
 5.	Policz wydawnictwa książek i wyświetl pojedyncze rekordy.
+mysql> select count(distinct wydawnictwo) as podlicz
+    -> from ksiazki;
+
 6.	Policz książki oraz wskaż cenę najwyższą, najniższa i średnią.
+mysql> select count(*),
+    -> max(cena),
+    -> min(cena),
+    -> avg(cena)
+    -> from ksiazki;
+
 7.	Wyświetl 3 książki od 20 do 50 zł, posortuj malejąco.
+mysql> select tytul,wydawnictwo,cena
+    -> from ksiazki
+    -> where cena between 20 and 50
+    -> order by cena desc
+    -> limit 3;
+
 8.	Wyświetl informację o wydawnictwach książek dla których w bazie danych jest co najmniej 2 tytuły książek.
+mysql> select count(tytul), wydawnictwo
+    -> from ksiazki
+    -> group by wydawnictwo
+    -> having count(tytul)>=2;
+
 9.	Wyświetl informację o wydawnictwie książek dla których w bazie danych jest co najmniej 3 tytuły książek wydanych po roku 2015. 
-10.	 Wskaż ilość znaków w nazwisku klienta.
+mysql> select count(tytul), wydawnictwo
+    -> from ksiazki
+    -> where rok_wydania>2015
+    -> group by wydawnictwo
+    -> having count(tytul)>=3;
+
+10.	Wskaż ilość znaków w nazwisku klienta.
+mysql> select *, length(nazwisko) as ilosc
+    -> from klient;
+
 11.	Wyświetl 4 znaki z nazwiska autora książek z prawej strony. 
+mysql> select *, right(nazwisko,4) as ilosc
+    -> from autor;
+
 12.	Zastosuj funkcje czasu w tabeli zamówienia.
+mysql> select data_zlozenia_zamowienia, monthname(data_zlozenia_zamowienia)
+    -> from zamowienia;
+
 13.	Policz numery zamówień klientów księgarni, dane pogrupuj według numerów klienta. 
+mysql> select count(id_zamowienia)
+    -> from zamowienia
+    -> group by id_klienta;
+
 14.	Policz datę wydania książek wszystkich autorów zgromadzonych w bazie danych księgarnia. Dane pogrupuj według nazwisk autorów. 
+mysql> select nazwisko,tytul,count(rok_wydania) as policz
+    -> from ksiazki,autor
+    -> where ksiazki.id_autora=autor.id_autora
+    -> group by nazwisko;
+
 15.	Policz wydania książek po roku 2014 pogrupuj według nazwisk autora. 
+mysql> select nazwisko,tytul,count(tytul) as policz
+    -> from ksiazki,autor
+    -> where ksiazki.id_autora=autor.id_autora and rok_wydania>2014
+    -> group by nazwisko;
+
 16.	Podaj średnią cenę książek z wydawnictwa PWN. Wyniki pogrupuj według tytułów książek.
+mysql> select tytul,avg(cena) as srednia
+    -> from ksiazki
+    -> where wydawnictwo='PWN'
+    -> group by tytul;
+
 17.	Policz zamówienia wysłane po roku 2016. Dane pogrupuj według sposobu płatności. 
+mysql> select count(zamowienia.data_wyslania) as policz
+    -> from zamowienia, faktura
+    -> where zamowienia.id_faktury=faktura.id_faktury
+    -> group by faktura.sposob_platnosci;
+
 18.	Z ilu wydawnictw pochodzą książki dostępne w bazie danych?
+mysql> select count(distinct wydawnictwo) as liczba
+    -> from ksiazki;
