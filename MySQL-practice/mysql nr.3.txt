@@ -1,0 +1,120 @@
+1. Połączenie faktury z zamówieniami:
+mysql> Select *
+    -> from faktura,zamowienia
+    -> where faktura.nr_faktury=zamowienia.id_zamowienia;
+
+2. Połączenie faktury z zamówieniami - inny sposób z 'inner join i on':
+mysql> Select *
+    -> from faktura
+    -> faktura inner join zamowienia
+    -> on faktura.nr_faktury=zamowienia.id_zamowienia; 
+
+3. Złączenie wewnętrzne lewostronne klienta i zamówienia:
+mysql> Select *
+    -> from klient
+    -> left join zamowienia
+    -> on klient.id_klient=zamowienia.id_zamowienia;
+
+4. Złączenie zewnętrzne prawostronne klienta i zamówienia:
+mysql> Select *
+    -> from zamowienia
+    -> right join klient
+    -> on klient.id_klient=zamowienia.id_zamowienia;
+
+5. Złączenie lewe książki i autora:
+mysql> Select *
+    -> from ksiazki
+    -> left join autor
+    -> on ksiazki.id_ksiazki=autor.id_autora;
+
+6. Wyświetla tylko dane kolumny, które wybraliśmy na początku:
+mysql> Select nazwisko, imie, cena, wydawnictwo
+    -> from autor inner join ksiazki
+    -> on autor.id_autora=ksiazki.id_ksiazki;
+
+7. Left outer join:
+mysql> select zamowienia.data_zlozenia_zamowienia, faktura.nr_faktury, faktura.sposob_platnosci
+    -> from zamowienia left outer join faktura
+    -> on zamowienia.id_faktury=faktura.nr_faktury;
+
+8. Policz numery zamówień klientów księgarni, dane pogrupuj według numerów klienta.
+mysql> select klient.id_klient, count(zamowienia.id_zamowienia) as liczba_zam
+    -> from klient inner join zamowienia
+    -> on klient.id_klient=zamowienia.id_zamowienia
+    -> group by klient.id_klient;
+
+9. Policz wydawnictwa poszczególnych autorów książek.
+mysql> select autor.id_autora,count(ksiazki.wydawnictwo) as podlicz
+    -> from autor inner join ksiazki
+    -> on autor.id_autora=ksiazki.id_autora
+    -> group by autor.id_autora;
+LUB
+mysql> select autor.nazwisko,count(ksiazki.wydawnictwo) as podlicz
+    -> from autor inner join ksiazki
+    -> on autor.id_autora=ksiazki.id_ksiazki
+    -> group by autor.nazwisko
+
+10. Policz datę wydania książek wszystkich autorów w bazie danych, pogrupuj według nazwisk autorów.
+mysql> select autor.nazwisko,count(ksiazki.rok_wydania) as podlicz    
+    -> from autor inner join ksiazki
+    -> on autor.id_autora=ksiazki.id_ksiazki
+    -> group by autor.nazwisko;
+
+11. Policz wydania książek po roku 2014, pogrupuj według nazwisk autorów.
+mysql> select autor.nazwisko, count(ksiazki.rok_wydania) as rok
+    -> from autor inner join ksiazki
+    -> on autor.id_autora=ksiazki.id_ksiazki
+    -> where rok_wydania>2014
+    -> group by autor.nazwisko;
+
+12. Podlicz tytuły książek, które zaczynają się na P, pogrupuj według nazwisk autorów.
+mysql> select autor.nazwisko,count(ksiazki.tytul) as podlicz
+    -> from autor inner join ksiazki
+    -> on autor.id_autora=ksiazki.id_ksiazki
+    -> where tytul like 'P%'
+    -> group by autor.nazwisko;
+
+13. Policz tytuły książek od 30 do 60zł, pogrupuj według nazwisk autorów.
+mysql> select autor.nazwisko,count(ksiazki.tytul) as podlicz
+    -> from autor inner join ksiazki
+    -> on autor.id_autora=ksiazki.id_ksiazki
+    -> where cena between 30 and 60
+    -> group by autor.nazwisko;
+
+14. Policz osoby, które złożyły zamówienie po 2018 roku podając ich imię i nazwisko, pogrupuj według klienta.
+mysql> select klient.nazwisko, klient.imie, count(zamowienia.data_zlozenia_zamowienia)
+    -> from klient inner join zamowienia
+    -> on klient.id_klient=zamowienia.id_zamowienia
+    -> where data_zlozenia_zamowienia>2018
+    -> group by klient.nazwisko;
+
+15. Policz płatność gotówką klientów, których data wystawienia faktury jest po roku 2017, pogrupuj według numeru klienta.
+mysql> select klient.nazwisko, klient.imie, count(faktura.sposob_platnosci)
+    -> from klient inner join faktura
+    -> on klient.id_klient=faktura.nr_faktury
+    -> where sposob_platnosci='przy odbiorze' and data_wystawienia_faktury>2017
+    -> group by klient.id_klient;
+
+16. Podaj średnią cenę książek z wydawnictwa PWN, pogrupuj według tytułów książek.
+mysql> select ksiazki.tytul, avg(ksiazki.cena) as srednia
+    -> from ksiazki
+    -> where wydawnictwo='Greg'
+    -> group by ksiazki.tytul;
+LUB
+mysql> select autor.nazwisko, ksiazki.tytul, avg(ksiazki.cena) as srednia
+    -> from ksiazki inner join autor
+    -> on ksiazki.id_ksiazki=autor.id_autora
+    -> where wydawnictwo='Greg'
+    -> group by ksiazki.tytul;
+
+17. Ile razem kosztują książki każdego autora? Podaj nazwisko autora oraz kwotę, za którą można kupić wszystkie jego książki.
+mysql> select autor.nazwisko, ksiazki.tytul, sum(ksiazki.cena) as sum
+    -> from ksiazki inner join autor
+    -> on ksiazki.id_ksiazki=autor.id_autora
+    -> group by autor.nazwisko;
+
+18. Podaj nazwiska i imiona oraz miejsce zamieszkania klientów, którzy zarejestrowali się w księgarni ale nie kupili żadnej książki.
+mysql> select klient.nazwisko, klient.imie, klient.miejscowosc, zamowienia.data_zlozenia_zamowienia
+    -> from klient inner join zamowienia
+    -> on klient.id_klient=zamowienia.id_klienta
+    -> where zamowienia.data_zlozenia_zamowienia is null;
