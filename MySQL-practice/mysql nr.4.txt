@@ -1,0 +1,18 @@
+1.	Policz klientów z bazy danych księgarnia.
+2.	Policz tytuły książek wydanych powyżej 2000 roku. 
+3.	Wyświetl różnicę między ceną maksymalną i minimalną książki.
+4.	Oblicz marżę narzuconą na książki (7% ceny książki).
+5.	Policz wydawnictwa książek i wyświetl pojedyncze rekordy.
+6.	Policz książki oraz wskaż cenę najwyższą, najniższa i średnią.
+7.	Wyświetl 3 książki od 20 do 50 zł, posortuj malejąco.
+8.	Wyświetl informację o wydawnictwach książek dla których w bazie danych jest co najmniej 2 tytuły książek.
+9.	Wyświetl informację o wydawnictwie książek dla których w bazie danych jest co najmniej 3 tytuły książek wydanych po roku 2015. 
+10.	 Wskaż ilość znaków w nazwisku klienta.
+11.	Wyświetl 4 znaki z nazwiska autora książek z prawej strony. 
+12.	Zastosuj funkcje czasu w tabeli zamówienia.
+13.	Policz numery zamówień klientów księgarni, dane pogrupuj według numerów klienta. 
+14.	Policz datę wydania książek wszystkich autorów zgromadzonych w bazie danych księgarnia. Dane pogrupuj według nazwisk autorów. 
+15.	Policz wydania książek po roku 2014 pogrupuj według nazwisk autora. 
+16.	Podaj średnią cenę książek z wydawnictwa PWN. Wyniki pogrupuj według tytułów książek.
+17.	Policz zamówienia wysłane po roku 2016. Dane pogrupuj według sposobu płatności. 
+18.	Z ilu wydawnictw pochodzą książki dostępne w bazie danych?
