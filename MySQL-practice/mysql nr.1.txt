@@ -1,0 +1,115 @@
+zad 1. Chcemy otrzymać informację o wydawnictwach książek, dla których w bazie danych są co najmniej 2 tytuły.
+mysql> select count(tytul),wydawnictwo
+    -> from ksiazki
+    -> group by wydawnictwo
+    -> having count(tytul)>=2
+    -> order by 2 desc;
+
+zad 2. Chcemy otrzymać informację o wydawnictwach książek, dla których w bazie danych są co najmniej 2 tytuły książek wydanych po roku 2017.
+mysql> select count(tytul),wydawnictwo
+    -> from ksiazki
+    -> where rok_wydania>2017
+    -> group by wydawnictwo
+    -> having count(tytul)>=2
+    -> order by 2 desc;
+
+zad 3. Wyświetl informację o wydawnictwach dla których w bazie danych jest co najmniej 2 tytuły książek wydanych przed 2020r.
+mysql> select count(tytul),wydawnictwo
+    -> from ksiazki
+    -> where rok_wydania<2020
+    -> group by wydawnictwo
+    -> having count(tytul)>=2
+    -> order by 1 desc;
+
+zad 4. Wyświetl informacje o średniej cenie książek z wydawnictwa, jeżeli tytułów książek jest więcej niż 2.
+mysql> select avg(cena),wydawnictwo,tytul
+    -> from ksiazki
+    -> where tytul>2
+    -> group by wydawnictwo
+    -> order by 1 desc;
+
+zad 5. Zliczenie klientów z bazy danych:
+mysql> select count(*)
+    -> from klientże
+    -> ;
+
+zad 6. Wyświetlić średnią cenę książek.
+mysql> select avg(cena)
+    -> from ksiazki;
+
+zad 7. Policz książki wydane po 2020.
+mysql> select count(tytul)
+    -> from ksiazki
+    -> where rok_wydania<2020;
+
+zad 8. Wskaż różnice między ceną max a min w bazie danych.
+mysql> select max(cena)-min(cena)
+    -> from ksiazki;
+
+zad 9. Z ilu miejscowości pochodzą klienci księgarni.
+mysql> select count(miejscowosc)
+    -> from klient;
+
+zad 10. Wskaż najwyższą cenę książek powyżej 30zł. Pogrupuj według tytułu.
+mysql> select tytul, max(cena)
+    -> from ksiazki
+    -> group by tytul
+    -> having max(cena)>30
+    -> order by 1 desc;
+
+zad 11. Policz tytuły książek w bazie danych powyżej 1.Pogrupuj według ceny.
+mysql> select count(tytul)
+    -> from ksiazki
+    -> group by cena
+    -> having count(cena)>=1
+    -> order by 1 desc;
+
+zad 12. Policz klientów z poszczególych miejscowości.
+mysql> select miejscowosc,count(miejscowosc)
+    -> from klient
+    -> group by miejscowosc
+    -> having count(miejscowosc)>=1;
+
+zad 13. Wyświetl informacje o liczbie tytułów książek wydanych po roku 2012, z wydawnictw dostępnych 
+w bazie danych, jeżeli tych tytułów jest więcej niż 1.
+
+mysql> select wydawnictwo,count(tytul)
+    -> from ksiazki
+    -> where rok_wydania>2012
+    -> group by wydawnictwo
+    -> having count(tytul)>=1;
+
+zad 14. Wyświetl informacje o średniej cenie książek z każdego wydawnictwa, pomiń wydawnictwa dla
+których średnia cena książek jest mniejsza niż 50zł.
+mysql> select wydawnictwo, avg(cena)
+    -> from ksiazki
+    -> group by wydawnictwo
+    -> having avg(cena)>=20;
+
+zad 15. Oblicz marżę narzuconą na książki(7% ceny książki).
+mysql> select tytul,cena,cena*0.07
+    -> from ksiazki;
+
+zad 16. Wyświetl ostateczną cenę uwzględniając marżę.
+mysql> select tytul,cena,cena*0.07,cena+cena*0.07
+    -> from ksiazki;
+
+zad 17. Podliczyć wszystko, wskazać maksymalną, minimalną i średnią ceny z książek.
+mysql> select count(*),
+    -> max(cena),
+    -> min(cena),
+    -> avg(cena)
+    -> from ksiazki;
+
+zad 18. Wyświetlenie 3 rekordów z tabeli ksiażki.
+mysql> select *
+    -> from ksiazki limit 3;
+
+zad 19.Wyświetlenie 3 rekordów z tabeli ksiażki począwszy od 1.
+mysql> select *
+    -> from ksiazki limit 1,3;
+
+zad 20. Wyświetlenie 3 rekordów z tabeli ksiażki, gdzie cena mniejsza od 20 i grupuje rosnąco.
+mysql> select *
+    -> from ksiazki
+    -> where cena>20 order by cena asc limit 3;
