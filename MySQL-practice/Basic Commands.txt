@@ -1,0 +1,30 @@
+1. Sprawdzenie jakie bazy danych mamy w kolekcji:
+> show databases;
+
+2. Tworzenie bazy danych:
+> create database nazwa_bazy;
+
+3. Wskazanie bieżącej bazy danych:
+> use nazwa_bazy;
+
+4. Utworzenie tabeli w bazie danych:
+> create table nazwa_tabeli
+🠒 (
+🠒 id_xxx int not null primary key,
+🠒...,
+🠒...
+🠒);
+
+5. Wyświetlenie ilości tabel i jakie są w bazie danych:
+> show tables from nazwa_bazy;
+
+6. Wstawienie rekordów do tabeli:
+> insert into nazwa_tabeli(nk 1,nk 2,nk 3)
+🠒 values(dane);
+
+7. Sprawdzenie jakie rekordy są w tabeli:
+> select * from nazwa_tabeli;
+
+8. Wyświetlenie jakie są kolumny w tabeli:
+> show columns from nazwa_tabeli;
+
