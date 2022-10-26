@@ -28,3 +28,4 @@
 8. Wyświetlenie jakie są kolumny w tabeli:
 > show columns from nazwa_tabeli;
 
+9. 
