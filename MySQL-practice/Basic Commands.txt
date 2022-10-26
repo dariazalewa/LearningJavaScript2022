@@ -28,4 +28,23 @@
 8. Wyświetlenie jakie są kolumny w tabeli:
 > show columns from nazwa_tabeli;
 
-9. 
+9. Umieszcza na końcu tabeli nową kolumnę:
+>  ALTER TABLE nazwa_tabeli
+🠒  ADD COLUMN nazwa_kolummy typ kolumny;
+
+10. Usuwa kolumnę z tabeli:
+>  ALTER TABLE nazwa_tabeli
+🠒  DROP COLUMN nazwa_kolumny;
+
+11. Zmienia nazwę tabeli:
+> Alter table nazwa_tabeli
+🠒 Rename as nowa_nazwa_tabeli;
+
+12. Usuwa tabelę w bazie danych:
+>  Drop table nazwa_tabeli;
+
+13. Usuwa bazę danych:
+> Drop database nazwa_bazy;
+
+
+  
