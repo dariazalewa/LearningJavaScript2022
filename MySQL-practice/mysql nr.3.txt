@@ -1,47 +1,127 @@
 1. Połączenie faktury z zamówieniami:
-mysql> Select *
+mysql> select *
     -> from faktura,zamowienia
-    -> where faktura.nr_faktury=zamowienia.id_zamowienia;
+    -> where faktura.id_faktury=zamowienia.id_zamowienia;
++------------+------------------+--------------------------+---------------+--------------------------+---------------+------------+------------+
+| id_faktury | sposob_platnosci | data_wystawienia_faktury | id_zamowienia | data_zlozenia_zamowienia | data_wyslania | id_klienta | id_faktury |
++------------+------------------+--------------------------+---------------+--------------------------+---------------+------------+------------+
+|          1 | BLIK             | 2020-02-19               |             1 | 2020-02-18               | 2020-02-20    |          1 |          1 |
+|          2 | Kart?            | 2019-06-12               |             2 | 2019-06-12               | 2019-06-13    |          2 |          2 |
+|          3 | BLIK             | 2022-09-21               |             3 | 2022-09-21               | 2022-09-22    |          3 |          3 |
+|          4 | Przy odbiorze    | 2020-01-12               |             4 | 2020-01-12               | 2022-01-12    |          4 |          4 |
+|          5 | Przy odbiorze    | 2021-12-05               |             5 | 2021-12-05               | 2021-12-05    |          5 |          5 |
++------------+------------------+--------------------------+---------------+--------------------------+---------------+------------+------------+
+5 rows in set (0.00 sec)
 
 2. Połączenie faktury z zamówieniami - inny sposób z 'inner join i on':
-mysql> Select *
+mysql> select *
     -> from faktura
     -> faktura inner join zamowienia
-    -> on faktura.nr_faktury=zamowienia.id_zamowienia; 
+    -> on faktura.id_faktury=zamowienia.id_zamowienia;
++------------+------------------+--------------------------+---------------+--------------------------+---------------+------------+------------+
+| id_faktury | sposob_platnosci | data_wystawienia_faktury | id_zamowienia | data_zlozenia_zamowienia | data_wyslania | id_klienta | id_faktury |
++------------+------------------+--------------------------+---------------+--------------------------+---------------+------------+------------+
+|          1 | BLIK             | 2020-02-19               |             1 | 2020-02-18               | 2020-02-20    |          1 |          1 |
+|          2 | Kart?            | 2019-06-12               |             2 | 2019-06-12               | 2019-06-13    |          2 |          2 |
+|          3 | BLIK             | 2022-09-21               |             3 | 2022-09-21               | 2022-09-22    |          3 |          3 |
+|          4 | Przy odbiorze    | 2020-01-12               |             4 | 2020-01-12               | 2022-01-12    |          4 |          4 |
+|          5 | Przy odbiorze    | 2021-12-05               |             5 | 2021-12-05               | 2021-12-05    |          5 |          5 |
++------------+------------------+--------------------------+---------------+--------------------------+---------------+------------+------------+
+5 rows in set (0.00 sec) 
 
 3. Złączenie wewnętrzne lewostronne klienta i zamówienia:
-mysql> Select *
+mysql> select *
     -> from klient
     -> left join zamowienia
-    -> on klient.id_klient=zamowienia.id_zamowienia;
+    -> on klient.id_klienta=zamowienia.id_zamowienia;
++------------+------------+-----------+------------+--------------------+--------------+-----------+---------------+--------------------------+---------------+------------+------------+
+| id_klienta | nazwisko   | imie      | mejscowosc | ulica              | kod_pocztowy | telefon   | id_zamowienia | data_zlozenia_zamowienia | data_wyslania | id_klienta | id_faktury |
++------------+------------+-----------+------------+--------------------+--------------+-----------+---------------+--------------------------+---------------+------------+------------+
+|          1 | Kozlowski  | Artur     | Warszawa   | Piotrowska 32      | 00-121       | 212345676 |             1 | 2020-02-18               | 2020-02-20    |          1 |          1 |
+|          2 | Pawlowska  | Marta     | Lublin     | Unii Lubelskiej 20 | 20-020       | 732084618 |             2 | 2019-06-12               | 2019-06-13    |          2 |          2 |
+|          3 | Kasprzyk   | Amelia    | Wroclaw    | Legnicka 43        | 53-674       | 632190563 |             3 | 2022-09-21               | 2022-09-22    |          3 |          3 |
+|          4 | Bialek     | Krzysztof | Goleniow   | Urz?dowa 2         | 72-100       | 344567314 |             4 | 2020-01-12               | 2022-01-12    |          4 |          4 |
+|          5 | Wesolowski | Jan       | Radom      | Andrzeja Struga 27 | 26-610       | 776510293 |             5 | 2021-12-05               | 2021-12-05    |          5 |          5 |
++------------+------------+-----------+------------+--------------------+--------------+-----------+---------------+--------------------------+---------------+------------+------------+
+5 rows in set (0.00 sec)
 
 4. Złączenie zewnętrzne prawostronne klienta i zamówienia:
-mysql> Select *
+mysql> select *
     -> from zamowienia
     -> right join klient
-    -> on klient.id_klient=zamowienia.id_zamowienia;
+    -> on klient.id_klienta=zamowienia.id_zamowienia;
++---------------+--------------------------+---------------+------------+------------+------------+------------+-----------+------------+--------------------+--------------+-----------+
+| id_zamowienia | data_zlozenia_zamowienia | data_wyslania | id_klienta | id_faktury | id_klienta | nazwisko   | imie      | mejscowosc | ulica              | kod_pocztowy | telefon   |
++---------------+--------------------------+---------------+------------+------------+------------+------------+-----------+------------+--------------------+--------------+-----------+
+|             1 | 2020-02-18               | 2020-02-20    |          1 |          1 |          1 | Kozlowski  | Artur     | Warszawa   | Piotrowska 32      | 00-121       | 212345676 |
+|             2 | 2019-06-12               | 2019-06-13    |          2 |          2 |          2 | Pawlowska  | Marta     | Lublin     | Unii Lubelskiej 20 | 20-020       | 732084618 |
+|             3 | 2022-09-21               | 2022-09-22    |          3 |          3 |          3 | Kasprzyk   | Amelia    | Wroclaw    | Legnicka 43        | 53-674       | 632190563 |
+|             4 | 2020-01-12               | 2022-01-12    |          4 |          4 |          4 | Bialek     | Krzysztof | Goleniow   | Urz?dowa 2         | 72-100       | 344567314 |
+|             5 | 2021-12-05               | 2021-12-05    |          5 |          5 |          5 | Wesolowski | Jan       | Radom      | Andrzeja Struga 27 | 26-610       | 776510293 |
++---------------+--------------------------+---------------+------------+------------+------------+------------+-----------+------------+--------------------+--------------+-----------+
+5 rows in set (0.00 sec)
 
 5. Złączenie lewe książki i autora:
-mysql> Select *
+mysql> select *
     -> from ksiazki
     -> left join autor
     -> on ksiazki.id_ksiazki=autor.id_autora;
++------------+------------------+-----------+-------+-------------+-------------+-----------+-------------+----------+
+| id_ksiazki | tytul            | id_autora | cena  | wydawnictwo | rok_wydania | id_autora | nazwisko    | imie     |
++------------+------------------+-----------+-------+-------------+-------------+-----------+-------------+----------+
+|          1 | Pan Tadeusz      |         1 | 33.00 | Greg        |        1994 |         1 | Mickiewicz  | Adam     |
+|          2 | Ogniem i mieczem |         2 | 46.00 | Elipsa      |        1992 |         2 | Sienkiewicz | Henryk   |
+|          3 | Nad Niemnem      |         3 | 40.00 | Elipsa      |        1992 |         3 | Orzeszkowa  | Eliza    |
+|          4 | Lalka            |         4 | 35.00 | Elipsa      |        1993 |         4 | Prus        | Boleslaw |
+|          5 | Kordian          |         5 | 35.00 | Greg        |        2022 |         5 | Slowacki    | Juliusz  |
++------------+------------------+-----------+-------+-------------+-------------+-----------+-------------+----------+
+5 rows in set (0.00 sec)
 
 6. Wyświetla tylko dane kolumny, które wybraliśmy na początku:
-mysql> Select nazwisko, imie, cena, wydawnictwo
+mysql> select nazwisko, imie, cena, wydawnictwo
     -> from autor inner join ksiazki
     -> on autor.id_autora=ksiazki.id_ksiazki;
++-------------+----------+-------+-------------+
+| nazwisko    | imie     | cena  | wydawnictwo |
++-------------+----------+-------+-------------+
+| Mickiewicz  | Adam     | 33.00 | Greg        |
+| Sienkiewicz | Henryk   | 46.00 | Elipsa      |
+| Orzeszkowa  | Eliza    | 40.00 | Elipsa      |
+| Prus        | Boleslaw | 35.00 | Elipsa      |
+| Slowacki    | Juliusz  | 35.00 | Greg        |
++-------------+----------+-------+-------------+
+5 rows in set (0.00 sec)
 
 7. Left outer join:
-mysql> select zamowienia.data_zlozenia_zamowienia, faktura.nr_faktury, faktura.sposob_platnosci
+mysql> select zamowienia.data_zlozenia_zamowienia, faktura.id_faktury, faktura.sposob_platnosci
     -> from zamowienia left outer join faktura
-    -> on zamowienia.id_faktury=faktura.nr_faktury;
+    -> on zamowienia.id_faktury=faktura.id_faktury;
++--------------------------+------------+------------------+
+| data_zlozenia_zamowienia | id_faktury | sposob_platnosci |
++--------------------------+------------+------------------+
+| 2020-02-18               |          1 | BLIK             |
+| 2019-06-12               |          2 | Kart?            |
+| 2022-09-21               |          3 | BLIK             |
+| 2020-01-12               |          4 | Przy odbiorze    |
+| 2021-12-05               |          5 | Przy odbiorze    |
++--------------------------+------------+------------------+
+5 rows in set (0.00 sec)
 
 8. Policz numery zamówień klientów księgarni, dane pogrupuj według numerów klienta.
-mysql> select klient.id_klient, count(zamowienia.id_zamowienia) as liczba_zam
+mysql> select klient.id_klienta, count(zamowienia.id_zamowienia) as liczba_zam
     -> from klient inner join zamowienia
-    -> on klient.id_klient=zamowienia.id_zamowienia
-    -> group by klient.id_klient;
+    -> on klient.id_klienta=zamowienia.id_zamowienia
+    -> group by klient.id_klienta;
++------------+------------+
+| id_klienta | liczba_zam |
++------------+------------+
+|          1 |          1 |
+|          2 |          1 |
+|          3 |          1 |
+|          4 |          1 |
+|          5 |          1 |
++------------+------------+
+5 rows in set (0.01 sec)
 
 9. Policz wydawnictwa poszczególnych autorów książek.
 mysql> select autor.id_autora,count(ksiazki.wydawnictwo) as podlicz
@@ -53,19 +133,45 @@ mysql> select autor.nazwisko,count(ksiazki.wydawnictwo) as podlicz
     -> from autor inner join ksiazki
     -> on autor.id_autora=ksiazki.id_ksiazki
     -> group by autor.nazwisko
++-------------+---------+
+| nazwisko    | podlicz |
++-------------+---------+
+| Mickiewicz  |       1 |
+| Sienkiewicz |       1 |
+| Orzeszkowa  |       1 |
+| Prus        |       1 |
+| Slowacki    |       1 |
++-------------+---------+
+5 rows in set (0.00 sec)
 
 10. Policz datę wydania książek wszystkich autorów w bazie danych, pogrupuj według nazwisk autorów.
-mysql> select autor.nazwisko,count(ksiazki.rok_wydania) as podlicz    
+mysql> select autor.nazwisko,count(ksiazki.rok_wydania) as podlicz
     -> from autor inner join ksiazki
     -> on autor.id_autora=ksiazki.id_ksiazki
     -> group by autor.nazwisko;
++-------------+---------+
+| nazwisko    | podlicz |
++-------------+---------+
+| Mickiewicz  |       1 |
+| Sienkiewicz |       1 |
+| Orzeszkowa  |       1 |
+| Prus        |       1 |
+| Slowacki    |       1 |
++-------------+---------+
+5 rows in set (0.00 sec)
 
 11. Policz wydania książek po roku 2014, pogrupuj według nazwisk autorów.
-mysql> select autor.nazwisko, count(ksiazki.rok_wydania) as rok
+mysql> select autor.nazwisko,count(ksiazki.rok_wydania) as rok
     -> from autor inner join ksiazki
     -> on autor.id_autora=ksiazki.id_ksiazki
     -> where rok_wydania>2014
     -> group by autor.nazwisko;
++----------+-----+
+| nazwisko | rok |
++----------+-----+
+| Slowacki |   1 |
++----------+-----+
+1 row in set (0.00 sec)
 
 12. Podlicz tytuły książek, które zaczynają się na P, pogrupuj według nazwisk autorów.
 mysql> select autor.nazwisko,count(ksiazki.tytul) as podlicz
@@ -73,6 +179,12 @@ mysql> select autor.nazwisko,count(ksiazki.tytul) as podlicz
     -> on autor.id_autora=ksiazki.id_ksiazki
     -> where tytul like 'P%'
     -> group by autor.nazwisko;
++------------+---------+
+| nazwisko   | podlicz |
++------------+---------+
+| Mickiewicz |       1 |
++------------+---------+
+1 row in set (0.00 sec)
 
 13. Policz tytuły książek od 30 do 60zł, pogrupuj według nazwisk autorów.
 mysql> select autor.nazwisko,count(ksiazki.tytul) as podlicz
@@ -80,22 +192,49 @@ mysql> select autor.nazwisko,count(ksiazki.tytul) as podlicz
     -> on autor.id_autora=ksiazki.id_ksiazki
     -> where cena between 30 and 60
     -> group by autor.nazwisko;
++-------------+---------+
+| nazwisko    | podlicz |
++-------------+---------+
+| Mickiewicz  |       1 |
+| Sienkiewicz |       1 |
+| Orzeszkowa  |       1 |
+| Prus        |       1 |
+| Slowacki    |       1 |
++-------------+---------+
+5 rows in set (0.00 sec)
 
 14. Policz osoby, które złożyły zamówienie po 2018 roku podając ich imię i nazwisko, pogrupuj według klienta.
 mysql> select klient.nazwisko, klient.imie, count(zamowienia.data_zlozenia_zamowienia)
     -> from klient inner join zamowienia
-    -> on klient.id_klient=zamowienia.id_zamowienia
+    -> on klient.id_klienta=zamowienia.id_zamowienia
     -> where data_zlozenia_zamowienia>2018
     -> group by klient.nazwisko;
++------------+-----------+--------------------------------------------+
+| nazwisko   | imie      | count(zamowienia.data_zlozenia_zamowienia) |
++------------+-----------+--------------------------------------------+
+| Kozlowski  | Artur     |                                          1 |
+| Pawlowska  | Marta     |                                          1 |
+| Kasprzyk   | Amelia    |                                          1 |
+| Bialek     | Krzysztof |                                          1 |
+| Wesolowski | Jan       |                                          1 |
++------------+-----------+--------------------------------------------+
+5 rows in set, 1 warning (0.00 sec)
 
 15. Policz płatność gotówką klientów, których data wystawienia faktury jest po roku 2017, pogrupuj według numeru klienta.
 mysql> select klient.nazwisko, klient.imie, count(faktura.sposob_platnosci)
     -> from klient inner join faktura
-    -> on klient.id_klient=faktura.nr_faktury
+    -> on klient.id_klienta=faktura.id_faktury
     -> where sposob_platnosci='przy odbiorze' and data_wystawienia_faktury>2017
-    -> group by klient.id_klient;
+    -> group by klient.id_klienta;
++------------+-----------+---------------------------------+
+| nazwisko   | imie      | count(faktura.sposob_platnosci) |
++------------+-----------+---------------------------------+
+| Bialek     | Krzysztof |                               1 |
+| Wesolowski | Jan       |                               1 |
++------------+-----------+---------------------------------+
+2 rows in set, 1 warning (0.00 sec)
 
-16. Podaj średnią cenę książek z wydawnictwa PWN, pogrupuj według tytułów książek.
+16. Podaj średnią cenę książek z wydawnictwa Greg, pogrupuj według tytułów książek.
 mysql> select ksiazki.tytul, avg(ksiazki.cena) as srednia
     -> from ksiazki
     -> where wydawnictwo='Greg'
@@ -106,15 +245,33 @@ mysql> select autor.nazwisko, ksiazki.tytul, avg(ksiazki.cena) as srednia
     -> on ksiazki.id_ksiazki=autor.id_autora
     -> where wydawnictwo='Greg'
     -> group by ksiazki.tytul;
++-------------+-----------+
+| tytul       | srednia   |
++-------------+-----------+
+| Pan Tadeusz | 33.000000 |
+| Kordian     | 35.000000 |
++-------------+-----------+
+2 rows in set (0.00 sec)
 
 17. Ile razem kosztują książki każdego autora? Podaj nazwisko autora oraz kwotę, za którą można kupić wszystkie jego książki.
 mysql> select autor.nazwisko, ksiazki.tytul, sum(ksiazki.cena) as sum
     -> from ksiazki inner join autor
     -> on ksiazki.id_ksiazki=autor.id_autora
     -> group by autor.nazwisko;
++-------------+------------------+-------+
+| nazwisko    | tytul            | sum   |
++-------------+------------------+-------+
+| Mickiewicz  | Pan Tadeusz      | 33.00 |
+| Sienkiewicz | Ogniem i mieczem | 46.00 |
+| Orzeszkowa  | Nad Niemnem      | 40.00 |
+| Prus        | Lalka            | 35.00 |
+| Slowacki    | Kordian          | 35.00 |
++-------------+------------------+-------+
+5 rows in set (0.00 sec)
 
 18. Podaj nazwiska i imiona oraz miejsce zamieszkania klientów, którzy zarejestrowali się w księgarni ale nie kupili żadnej książki.
 mysql> select klient.nazwisko, klient.imie, klient.miejscowosc, zamowienia.data_zlozenia_zamowienia
     -> from klient inner join zamowienia
-    -> on klient.id_klient=zamowienia.id_klienta
+    -> on klient.id_klienta=zamowienia.id_klienta
     -> where zamowienia.data_zlozenia_zamowienia is null;
+Empty set (0.00 sec)
