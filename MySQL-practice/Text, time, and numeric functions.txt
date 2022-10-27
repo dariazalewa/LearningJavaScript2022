@@ -1,0 +1,86 @@
+Funkcje tekstowe
+1.	Length - to obliczenie, ile jest liter w danym słowie lub tekście, np:
+mysql> select miejscowosc, length(miejscowosc) as dlug
+    -> from klient;
++------------+------+
+| miejscowosc | dlug |
++------------+------+
+| Warszawa   |    8 |
+| Lublin     |    6 |
+| Wroclaw    |    7 |
+| Goleniow   |    8 |
+| Radom      |    5 |
++------------+------+
+5 rows in set (0.00 sec)
+
+2. Left - wypisuje z lewej strony tyle liter ile mu podamy, np. wpiszemy left(imie,4) to wypisze z imienia lewej strony 4 pierwsze litery:
+mysql> select imie, left(imie,4) as lewa
+    -> from autor;
++----------+------+
+| imie     | lewa |
++----------+------+
+| Adam     | Adam |
+| Henryk   | Henr |
+| Eliza    | Eliz |
+| Boleslaw | Bole |
+| Juliusz  | Juli |
++----------+------+
+5 rows in set (0.00 sec)
+
+3. Right - wypisuje natomiast teraz z prawej strony tyle liter ile mu podamy, np. wpiszemy right(imie,4) to wypisze z imienia teraz 4 ostatnie litery, bo z prawej:
+mysql> select imie, right(imie,4) as prawa
+    -> from autor;
++----------+-------+
+| imie     | prawa |
++----------+-------+
+| Adam     | Adam  |
+| Henryk   | nryk  |
+| Eliza    | liza  |
+| Boleslaw | slaw  |
+| Juliusz  | iusz  |
++----------+-------+
+5 rows in set (0.00 sec)
+
+4. Upper - wszystkie litery w wyrazie są napisane WIELKĄ literą:
+mysql> select tytul, upper(tytul) as wielkie
+    -> from ksiazki;
++------------------+------------------+
+| tytul            | wielkie          |
++------------------+------------------+
+| Pan Tadeusz      | PAN TADEUSZ      |
+| Ogniem i mieczem | OGNIEM I MIECZEM |
+| Nad Niemnem      | NAD NIEMNEM      |
+| Lalka            | LALKA            |
+| Kordian          | KORDIAN          |
++------------------+------------------+
+5 rows in set (0.00 sec)
+
+5. Lower - wszystkie litery w wyrazie są napisane małą literą:
+mysql> select tytul, lower(tytul) as male
+    -> from ksiazki;
++------------------+------------------+
+| tytul            | male             |
++------------------+------------------+
+| Pan Tadeusz      | pan tadeusz      |
+| Ogniem i mieczem | ogniem i mieczem |
+| Nad Niemnem      | nad niemnem      |
+| Lalka            | lalka            |
+| Kordian          | kordian          |
++------------------+------------------+
+5 rows in set (0.00 sec) 
+
+6. Substring - np. substing(tytul,3,5) czyli wyświetla nam z tytułu litery od 3 do 5:
+mysql> select tytul, substring(tytul,3,5) as dlug
+    -> from ksiazki;
++------------------+-------+
+| tytul            | dlug  |
++------------------+-------+
+| Pan Tadeusz      | n Tad |
+| Ogniem i mieczem | niem  |
+| Nad Niemnem      | d Nie |
+| Lalka            | lka   |
+| Kordian          | rdian |
++------------------+-------+
+5 rows in set (0.00 sec)
+
+
