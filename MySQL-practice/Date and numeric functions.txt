@@ -1,0 +1,106 @@
+1.	Date - wyświetlenie daty, np. wysłanego zamówieni:
+mysql> select date(data_wyslania)
+    -> from zamowienia;
++---------------------+
+| date(data_wyslania) |
++---------------------+
+| 2020-02-20          |
+| 2019-06-13          |
+| 2022-09-22          |
+| 2022-01-12          |
+| 2021-12-05          |
++---------------------+
+5 rows in set (0.00 sec)
+
+2. Dayname - sprawdza i wyświetla jaki to był dzień tygodnia:
+mysql> select data_wyslania,dayname(data_wyslania)
+    -> from zamowienia;
++---------------+------------------------+
+| data_wyslania | dayname(data_wyslania) |
++---------------+------------------------+
+| 2020-02-20    | Thursday               |
+| 2019-06-13    | Thursday               |
+| 2022-09-22    | Thursday               |
+| 2022-01-12    | Wednesday              |
+| 2021-12-05    | Sunday                 |
++---------------+------------------------+
+5 rows in set (0.00 sec)
+
+3. Dayofmonth - wyświetla, który to był dzień miesiąca:
+mysql> select data_wyslania,dayofmonth(data_wyslania)
+    -> from zamowienia;
++---------------+---------------------------+
+| data_wyslania | dayofmonth(data_wyslania) |
++---------------+---------------------------+
+| 2020-02-20    |                        20 |
+| 2019-06-13    |                        13 |
+| 2022-09-22    |                        22 |
+| 2022-01-12    |                        12 |
+| 2021-12-05    |                         5 |
++---------------+---------------------------+
+5 rows in set (0.00 sec)
+
+4. Monthname - określa, który to był miesiąc i jak jest jego nazwa:
+mysql> select data_wystawienia_faktury,monthname(data_wystawienia_faktury)
+    -> from faktura;
++--------------------------+-------------------------------------+
+| data_wystawienia_faktury | monthname(data_wystawienia_faktury) |
++--------------------------+-------------------------------------+
+| 2020-02-19               | February                            |
+| 2019-06-12               | June                                |
+| 2022-09-21               | September                           |
+| 2020-01-12               | January                             |
+| 2021-12-05               | December                            |
++--------------------------+-------------------------------------+
+5 rows in set (0.00 sec)
+
+5. Curdate - wyświetla aktualną datę:
+mysql> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2022-10-27 |
++------------+
+1 row in set (0.00 sec)
+
+6. Curtime - wyświetla aktualny czas:
+mysql> select curtime();
++-----------+
+| curtime() |
++-----------+
+| 10:34:13  |
++-----------+
+1 row in set (0.00 sec)
+
+7. Now - wyświetla aktualną datę i czas naraz:
+mysql> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2022-10-27 10:35:19 |
++---------------------+
+1 row in set (0.00 sec)
+
+8. Ceiling - zwraca najbliższą wartość całkowitą, np. gdy mamy liczbę po przecinku:
+mysql> select cena, ceiling(cena)
+    -> from ksiazki;
++-------+---------------+
+| cena  | ceiling(cena) |
++-------+---------------+
+| 33.00 |            33 |
+| 46.00 |            46 |
+| 40.00 |            40 |
+| 35.00 |            35 |
+| 35.00 |            35 |
++-------+---------------+
+5 rows in set (0.00 sec)
+
+9. Round - zaokrągla liczbę do podanej mu liczby miejsc po przecinku: 
+mysql> select round(-12.4) as zaokraglona;
++-------------+
+| zaokraglona |
++-------------+
+|         -12 |
++-------------+
+1 row in set (0.00 sec)
+
