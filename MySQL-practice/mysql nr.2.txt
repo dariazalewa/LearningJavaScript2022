@@ -2,63 +2,147 @@ Zadanie 1 Wyszukaj nazwisko autora z rekordu 2.
 mysql> select nazwisko
     -> from autor
     -> where id_autora=2;
++-------------+
+| nazwisko    |
++-------------+
+| Sienkiewicz |
++-------------+
+1 row in set (0.00 sec)
 
-Zadanie 2 Wyszukaj nazwisko i imię klienta, którego nazwisko zaczyna się na literę K. 
+Zadanie 2 Wyszukaj nazwisko i imię klienta, którego nazwisko zaczyna się na literę P. 
 mysql> select nazwisko,imie
-    -> from klient
-    -> where nazwisko like 'K%';
+    -> from autor
+    -> where nazwisko like 'P%';
++----------+----------+
+| nazwisko | imie     |
++----------+----------+
+| Prus     | Boleslaw |
++----------+----------+
+1 row in set (0.00 sec)
 
 Zadanie 3 Wyszukaj klientów z Warszawy.
 mysql> select nazwisko,imie,miejscowosc
     -> from klient
     -> where miejscowosc='Warszawa';
++-----------+-------+------------+
+| nazwisko  | imie  | miejscowosc|
++-----------+-------+------------+
+| Kozlowski | Artur | Warszawa   |
++-----------+-------+------------+
+1 row in set (0.00 sec)
 
-Zadanie 4 Wyszukaj klientów z Warszawy lub z Zamościa.
+Zadanie 4 Wyszukaj klientów z Warszawy lub z Radomia.
 mysql> select nazwisko,imie,miejscowosc
     -> from klient
-    -> where miejscowosc='Warszawa' or miejscowosc='Zamość';
+    -> where miejscowosc='Warszawa' or miejscowosc='Radom';
++------------+-------+------------+
+| nazwisko   | imie  | miejscowosc|
++------------+-------+------------+
+| Kozlowski  | Artur | Warszawa   |
+| Wesolowski | Jan   | Radom      |
++------------+-------+------------+
+2 rows in set (0.00 sec)
 
 Zadanie 5 Wyszukaj tytuły, wydawnictwo oraz cenę książek z przedziału od 50 do 60 zł.
 mysql> select tytul,wydawnictwo,cena
     -> from ksiazki
     -> where cena between 50 and 60;
 
-Zadanie 6 Wyszukaj tytuły, wydawnictwo oraz cenę książek z przedziału od 50 do 60 zł posortuj cenę malejąco.
+Zadanie 6 Wyszukaj tytuły, wydawnictwo oraz cenę książek z przedziału od 30 do 40 zł posortuj cenę malejąco.
 mysql> select tytul,wydawnictwo,cena
     -> from ksiazki
-    -> where cena between 50 and 60
+    -> where cena between 30 and 40
     -> order by cena desc;
++-------------+-------------+-------+
+| tytul       | wydawnictwo | cena  |
++-------------+-------------+-------+
+| Nad Niemnem | Elipsa      | 40.00 |
+| Lalka       | Elipsa      | 35.00 |
+| Kordian     | Greg        | 35.00 |
+| Pan Tadeusz | Greg        | 33.00 |
++-------------+-------------+-------+
+4 rows in set (0.00 sec)
 
 Zadanie 7 Policz wydawnictwa książek. Dodaj alias tabeli jako liczba. 
 mysql> select count(wydawnictwo) as liczba
     -> from ksiazki;
++--------+
+| liczba |
++--------+
+|      5 |
++--------+
+1 row in set (0.00 sec)
 
 Zadanie 8 Policz wydawnictwo i wyświetl pojedyncze nazwy. 
 mysql> select count(distinct wydawnictwo) as liczba
     -> from ksiazki;
++--------+
+| liczba |
++--------+
+|      2 |
++--------+
+1 row in set (0.00 sec)
 
 Zadanie 9 Policz wydawnictwo książek w bazie danych. Pogrupuj według ceny i posortuj według 1 kolumny malejąco. 
 mysql> select count(wydawnictwo) as liczba
     -> from ksiazki
     -> group by cena
     -> order by 1 desc;
++--------+
+| liczba |
++--------+
+|      2 |
+|      1 |
+|      1 |
+|      1 |
++--------+
+4 rows in set (0.00 sec)
 
 Zadanie 10 Policz nazwiska klientów, pogrupuj według miejscowości i uporządkuj według 1 kolumny rosnąco. 
 mysql> select count(nazwisko)
     -> from klient
     -> group by miejscowosc
     -> order by 1 asc;
++-----------------+
+| count(nazwisko) |
++-----------------+
+|               1 |
+|               1 |
+|               1 |
+|               1 |
+|               1 |
++-----------------+
+5 rows in set (0.00 sec)
 
 Zadanie 11 Policz datę złożenia zamówienia, pogrupuj według daty wysłania towaru, dane uporządkuj według 1 kolumny malejąco.
 mysql> select count(data_zlozenia_zamowienia)
     -> from zamowienia
     -> group by data_wyslania
     -> order by 1 desc;
++---------------------------------+
+| count(data_zlozenia_zamowienia) |
++---------------------------------+
+|                               1 |
+|                               1 |
+|                               1 |
+|                               1 |
+|                               1 |
++---------------------------------+
+5 rows in set (0.00 sec)
  
 Zadanie 12 Policz rok wydania książek dane pogrupuj według ceny książek. 
 mysql> select count(rok_wydania)
     -> from ksiazki
     -> group by cena;
++--------------------+
+| count(rok_wydania) |
++--------------------+
+|                  1 |
+|                  1 |
+|                  1 |
+|                  2 |
++--------------------+
+4 rows in set (0.00 sec)
 
 Zadanie 13 Policz daty wystawienia faktur w bazie danych księgarnia, następnie dane pogrupuj według sposobu płatności. 
 Zastosuj klauzule having która pozwoli na wyświetlenie policzonych faktur. 
@@ -66,13 +150,28 @@ mysql> select count(data_wystawienia_faktury)
     -> from faktura
     -> group by sposob_platnosci
     -> having count(data_wystawienia_faktury);
++---------------------------------+
+| count(data_wystawienia_faktury) |
++---------------------------------+
+|                               2 |
+|                               1 |
+|                               2 |
++---------------------------------+
+3 rows in set (0.00 sec)
 
-Zadanie 14 Wyświetl dane dotyczące książek, w tym: tytuł, cenę powyżej 50 zł oraz  wydawnictwo. Dane pogrupuj według wydawnictwa. 
+Zadanie 14 Wyświetl dane dotyczące książek, w tym: tytuł, cenę powyżej 30 zł oraz  wydawnictwo. Dane pogrupuj według wydawnictwa. 
 Uporządkuj dane według 2 kolumny malejąco. 
 mysql> select tytul,cena,wydawnictwo
     -> from ksiazki
-    -> where cena>50
+    -> where cena>30
     -> group by wydawnictwo
     -> order by 2 desc;
++------------------+-------+-------------+
+| tytul            | cena  | wydawnictwo |
++------------------+-------+-------------+
+| Ogniem i mieczem | 46.00 | Elipsa      |
+| Pan Tadeusz      | 33.00 | Greg        |
++------------------+-------+-------------+
+2 rows in set (0.00 sec)
 
 Zadanie 15 Policz sposoby płatności faktur uwzględniając datę wystawienia faktury. 
