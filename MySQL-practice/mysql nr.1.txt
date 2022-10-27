@@ -4,14 +4,27 @@ mysql> select count(tytul),wydawnictwo
     -> group by wydawnictwo
     -> having count(tytul)>=2
     -> order by 2 desc;
++--------------+-------------+
+| count(tytul) | wydawnictwo |
++--------------+-------------+
+|            2 | Greg        |
+|            3 | Elipsa      |
++--------------+-------------+
+2 rows in set (0.00 sec)
 
-zad 2. Chcemy otrzymać informację o wydawnictwach książek, dla których w bazie danych są co najmniej 2 tytuły książek wydanych po roku 2017.
+zad 2. Chcemy otrzymać informację o wydawnictwach książek, dla których w bazie danych są co najmniej 2 tytuły książek wydanych po roku 1992.
 mysql> select count(tytul),wydawnictwo
     -> from ksiazki
-    -> where rok_wydania>2017
+    -> where rok_wydania>1992
     -> group by wydawnictwo
     -> having count(tytul)>=2
     -> order by 2 desc;
++--------------+-------------+
+| count(tytul) | wydawnictwo |
++--------------+-------------+
+|            2 | Greg        |
++--------------+-------------+
+1 row in set (0.00 sec)
 
 zad 3. Wyświetl informację o wydawnictwach dla których w bazie danych jest co najmniej 2 tytuły książek wydanych przed 2020r.
 mysql> select count(tytul),wydawnictwo
@@ -20,35 +33,71 @@ mysql> select count(tytul),wydawnictwo
     -> group by wydawnictwo
     -> having count(tytul)>=2
     -> order by 1 desc;
++--------------+-------------+
+| count(tytul) | wydawnictwo |
++--------------+-------------+
+|            3 | Elipsa      |
++--------------+-------------+
+1 row in set (0.00 sec)
 
 zad 4. Wyświetl informacje o średniej cenie książek z wydawnictwa, jeżeli tytułów książek jest więcej niż 2.
-mysql> select avg(cena),wydawnictwo,tytul
+mysql> select avg(cena) as srednia,wydawnictwo,tytul
     -> from ksiazki
     -> where tytul>2
     -> group by wydawnictwo
     -> order by 1 desc;
+Empty set, 5 warnings (0.00 sec)
 
 zad 5. Zliczenie klientów z bazy danych:
 mysql> select count(*)
-    -> from klientże
-    -> ;
+    -> from klient;
++----------+
+| count(*) |
++----------+
+|        5 |
++----------+
+1 row in set (0.00 sec)
 
 zad 6. Wyświetlić średnią cenę książek.
 mysql> select avg(cena)
     -> from ksiazki;
++-----------+
+| avg(cena) |
++-----------+
+| 37.800000 |
++-----------+
+1 row in set (0.00 sec)
 
 zad 7. Policz książki wydane po 2020.
 mysql> select count(tytul)
     -> from ksiazki
     -> where rok_wydania<2020;
++--------------+
+| count(tytul) |
++--------------+
+|            4 |
++--------------+
+1 row in set (0.00 sec)
 
 zad 8. Wskaż różnice między ceną max a min w bazie danych.
 mysql> select max(cena)-min(cena)
     -> from ksiazki;
++---------------------+
+| max(cena)-min(cena) |
++---------------------+
+|               13.00 |
++---------------------+
+1 row in set (0.00 sec)   
 
 zad 9. Z ilu miejscowości pochodzą klienci księgarni.
 mysql> select count(miejscowosc)
     -> from klient;
++-------------------+
+| count(miejscowosc) |
++-------------------+
+|                 5 |
++-------------------+
+1 row in set (0.00 sec)
 
 zad 10. Wskaż najwyższą cenę książek powyżej 30zł. Pogrupuj według tytułu.
 mysql> select tytul, max(cena)
@@ -56,6 +105,16 @@ mysql> select tytul, max(cena)
     -> group by tytul
     -> having max(cena)>30
     -> order by 1 desc;
++------------------+-----------+
+| tytul            | max(cena) |
++------------------+-----------+
+| Pan Tadeusz      |     33.00 |
+| Ogniem i mieczem |     46.00 |
+| Nad Niemnem      |     40.00 |
+| Lalka            |     35.00 |
+| Kordian          |     35.00 |
++------------------+-----------+
+5 rows in set (0.00 sec)
 
 zad 11. Policz tytuły książek w bazie danych powyżej 1.Pogrupuj według ceny.
 mysql> select count(tytul)
