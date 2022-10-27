@@ -1,4 +1,3 @@
-Funkcje tekstowe
 1.	Length - to obliczenie, ile jest liter w danym słowie lub tekście, np:
 mysql> select miejscowosc, length(miejscowosc) as dlug
     -> from klient;
@@ -82,5 +81,4 @@ mysql> select tytul, substring(tytul,3,5) as dlug
 | Kordian          | rdian |
 +------------------+-------+
 5 rows in set (0.00 sec)
-
 
