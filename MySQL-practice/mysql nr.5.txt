@@ -1,36 +1,82 @@
-1. Wyszukaj tytuły, wydawnictwo, cenę książek z przedziału od 20 do 30zł, posortuj cenę malejąco.
+1. Wyszukaj tytuły, wydawnictwo, cenę książek z przedziału od 30 do 40zł, posortuj cenę malejąco.
 mysql> select tytul, wydawnictwo, cena
     -> from ksiazki
-    -> where cena between 20 and 30
+    -> where cena between 30 and 40
     -> order by cena desc;
++-------------+-------------+-------+
+| tytul       | wydawnictwo | cena  |
++-------------+-------------+-------+
+| Nad Niemnem | PWN         | 40.00 |
+| Lalka       | Elipsa      | 35.00 |
+| Kordian     | Greg        | 35.00 |
+| Pan Tadeusz | Greg        | 33.00 |
++-------------+-------------+-------+
+4 rows in set (0.00 sec)
 
 2. Policz wydawnictwa i wyświetl pojedyncze nazwy.
 mysql> select count( distinct wydawnictwo)
     -> from ksiazki;
++---------+
+| Podlicz |
++---------+
+|       3 |
++---------+
+1 row in set (0.00 sec)
 
 3. Policz wydawnictwo książek. Pogrupuj według ceny i posortuj według 1 kolumny malejąco.
 mysql> select count(wydawnictwo), cena
     -> from ksiazki
     -> group by cena
     -> order by 1 desc;
++--------------------+-------+
+| count(wydawnictwo) | cena  |
++--------------------+-------+
+|                  2 | 35.00 |
+|                  1 | 33.00 |
+|                  1 | 46.00 |
+|                  1 | 40.00 |
++--------------------+-------+
+4 rows in set (0.00 sec)
 
 4. Policz nazwiska klientów, pogrupuj według miejscowości i uporządkuj według 1 kolumny rosnąco.
 mysql> select count(nazwisko)
     -> from klient
     -> group by miejscowosc
     -> order by 1 asc;
++--------+
+| policz |
++--------+
+|      1 |
+|      1 |
+|      1 |
+|      1 |
+|      1 |
++--------+
+5 rows in set (0.00 sec)
 
-5. Wyświetl dane dotyczące książek: tytuł, cenę powyżej 50zł, wydawnictwo. Dane pogrupuj według wydawnictwa. 
+5. Wyświetl dane dotyczące książek: tytuł, cenę powyżej 40zł, wydawnictwo. Dane pogrupuj według wydawnictwa. 
 Uporządkuj dane według 2 kolumny malejąco.
 mysql> select tytul, cena, wydawnictwo
     -> from ksiazki
-    -> where cena>50
+    -> where cena>40
     -> group by wydawnictwo
     -> order by 2 desc;
++------------------+-------+-------------+
+| tytul            | cena  | wydawnictwo |
++------------------+-------+-------------+
+| Ogniem i mieczem | 46.00 | Elipsa      |
++------------------+-------+-------------+
+1 row in set (0.00 sec)
 
 6. Wyświetl różnicę między maksymalną a minimalną ceną książki.
-mysql> select max(cena)-min(cena)
+mysql> select max(cena),min(cena),max(cena)-min(cena)
     -> from ksiazki;
++-----------+-----------+---------------------+
+| max(cena) | min(cena) | max(cena)-min(cena) |
++-----------+-----------+---------------------+
+|     46.00 |     33.00 |               13.00 |
++-----------+-----------+---------------------+
+1 row in set (0.00 sec)
 
 7. Policz imiona autorów, które pojawiają się więcej niż 2 razy. Pogrupuj według nazwiska i uporządkuj według 2 kolumny rosnąco.
 mysql> select count(imie), nazwisko
@@ -38,6 +84,7 @@ mysql> select count(imie), nazwisko
     -> group by nazwisko
     -> having count(imie)>=2
     -> order by 2 asc;
+Empty set (0.00 sec)
 
 8. Policz nazwiska osób, które pojawiają się w tabeli więcej niż 1 w tabeli klient. 
 Dane pogrupuj według miejscowości zamieszkania tych osób.
@@ -45,3 +92,13 @@ mysql> select count(nazwisko)
     -> from klient
     -> group by miejscowosc
     -> having count(nazwisko)>=1;
++-----------------+
+| count(nazwisko) |
++-----------------+
+|               1 |
+|               1 |
+|               1 |
+|               1 |
+|               1 |
++-----------------+
+5 rows in set (0.00 sec)
