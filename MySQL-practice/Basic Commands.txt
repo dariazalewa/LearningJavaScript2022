@@ -1,11 +1,25 @@
 1. Sprawdzenie jakie bazy danych mamy w kolekcji:
 > show databases;
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ksiegarnia         |
+| ludzie             |
++--------------------+
+2 rows in set (0.03 sec)
 
 2. Tworzenie bazy danych:
 > create database nazwa_bazy;
+np.
+mysql> create database oki;
+Query OK, 1 row affected (0.01 sec)
 
 3. Wskazanie bieżącej bazy danych:
 > use nazwa_bazy;
+np.
+mysql> use oki;
+Database changed
 
 4. Utworzenie tabeli w bazie danych:
 > create table nazwa_tabeli
@@ -14,41 +28,104 @@
 🠒...,
 🠒...
 🠒);
+np.
+mysql> create table ok
+    -> (
+    -> id_ok int not null primary key,
+    -> nazwisko char(30),
+    -> imie char(30)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
 
 5. Wyświetlenie ilości tabel i jakie są w bazie danych:
 > show tables from nazwa_bazy;
+np.
+mysql> show tables from oki;
++---------------+
+| Tables_in_oki |
++---------------+
+| ok            |
++---------------+
+1 row in set (0.01 sec)
 
 6. Wstawienie rekordów do tabeli:
 > insert into nazwa_tabeli(nk 1,nk 2,nk 3)
 🠒 values(dane);
+np.
+mysql> insert into ok(id_ok,nazwisko,imie)
+    -> values(1,'Nowak','Jan');
+Query OK, 1 row affected (0.01 sec)
 
 7. Sprawdzenie jakie rekordy są w tabeli:
 > select * from nazwa_tabeli;
+np.
+mysql> select * from ok;
++-------+----------+------+
+| id_ok | nazwisko | imie |
++-------+----------+------+
+|     1 | Nowak    | Jan  |
++-------+----------+------+
+1 row in set (0.00 sec)
 
 8. Wyświetlenie jakie są kolumny w tabeli:
 > show columns from nazwa_tabeli;
+np.
+mysql> show columns from ok;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| id_ok    | int      | NO   | PRI | NULL    |       |
+| nazwisko | char(30) | YES  |     | NULL    |       |
+| imie     | char(30) | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
 
 9. Umieszcza na końcu tabeli nową kolumnę:
 >  ALTER TABLE nazwa_tabeli
 🠒  ADD COLUMN nazwa_kolummy typ kolumny;
+np.
+mysql> alter table ok
+    -> add column adres char(50) not null;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
 
-10. Usuwa kolumnę z tabeli:
->  ALTER TABLE nazwa_tabeli
-🠒  DROP COLUMN nazwa_kolumny;
-
-11. Zmiana nazwy kolumny w tabeli:
+10. Zmiana nazwy kolumny w tabeli:
 > alter table nazwa_tabeli
 🠒 rename column stara_nazwa_kolumny to nowa_nazwa_kolumny;
+np.
+mysql> alter table ok
+    -> rename column adres to zamieszkanie;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+11. Usuwa kolumnę z tabeli:
+>  ALTER TABLE nazwa_tabeli
+🠒  DROP COLUMN nazwa_kolumny;
+np.
+mysql> alter table ok
+    -> drop column zamieszkanie;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
 
 12. Zmienia nazwę tabeli:
 > Alter table nazwa_tabeli
 🠒 Rename as nowa_nazwa_tabeli;
+np.
+mysql> alter table ok
+    -> rename as aha;
+Query OK, 0 rows affected (0.01 sec)
 
 13. Usuwa tabelę w bazie danych:
 >  Drop table nazwa_tabeli;
+np.
+mysql> drop table aha;
+Query OK, 0 rows affected (0.02 sec)
 
 14. Usuwa bazę danych:
 > Drop database nazwa_bazy;
+np.
+mysql> drop database oki;
+Query OK, 0 rows affected (0.01 sec)
 
 
   
