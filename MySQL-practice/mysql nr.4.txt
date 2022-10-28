@@ -1,6 +1,12 @@
 1.	Policz klientów z bazy danych księgarnia.
 mysql> select count(nazwisko) as Podlicz
     -> from klient;
++---------+
+| Podlicz |
++---------+
+|       5 |
++---------+
+1 row in set (0.00 sec)
 
 2.	Policz tytuły książek wydanych powyżej 2000 roku.
 mysql> select count(tytul) as Podlicz
