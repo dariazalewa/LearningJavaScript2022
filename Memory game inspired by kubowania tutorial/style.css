@@ -1,0 +1,16 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgb(231, 188, 86);
+}
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 500px;
+    height: 400px;
+  }
