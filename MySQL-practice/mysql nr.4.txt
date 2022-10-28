@@ -12,18 +12,46 @@ mysql> select count(nazwisko) as Podlicz
 mysql> select count(tytul) as Podlicz
     -> from ksiazki
     -> where rok_wydania>2000;
++---------+
+| Podlicz |
++---------+
+|       1 |
++---------+
+1 row in set (0.00 sec)
 
 3.	Wyświetl różnicę między ceną maksymalną i minimalną książki.
- mysql> select max(cena)-min(cena)
+mysql> select max(cena),min(cena),max(cena)-min(cena)
     -> from ksiazki;
++-----------+-----------+---------------------+
+| max(cena) | min(cena) | max(cena)-min(cena) |
++-----------+-----------+---------------------+
+|     46.00 |     33.00 |               13.00 |
++-----------+-----------+---------------------+
+1 row in set (0.00 sec)
 
 4.	Oblicz marżę narzuconą na książki (7% ceny książki).
 mysql> select tytul,cena,cena*0.07
     -> from ksiazki;
++------------------+-------+-----------+
+| tytul            | cena  | cena*0.07 |
++------------------+-------+-----------+
+| Pan Tadeusz      | 33.00 |    2.3100 |
+| Ogniem i mieczem | 46.00 |    3.2200 |
+| Nad Niemnem      | 40.00 |    2.8000 |
+| Lalka            | 35.00 |    2.4500 |
+| Kordian          | 35.00 |    2.4500 |
++------------------+-------+-----------+
+5 rows in set (0.00 sec)
 
 5.	Policz wydawnictwa książek i wyświetl pojedyncze rekordy.
 mysql> select count(distinct wydawnictwo) as podlicz
     -> from ksiazki;
++---------+
+| Podlicz |
++---------+
+|       3 |
++---------+
+1 row in set (0.00 sec)
 
 6.	Policz książki oraz wskaż cenę najwyższą, najniższa i średnią.
 mysql> select count(*),
@@ -31,6 +59,12 @@ mysql> select count(*),
     -> min(cena),
     -> avg(cena)
     -> from ksiazki;
++----------+-----------+-----------+-----------+
+| count(*) | max(cena) | min(cena) | avg(cena) |
++----------+-----------+-----------+-----------+
+|        5 |     46.00 |     33.00 | 37.800000 |
++----------+-----------+-----------+-----------+
+1 row in set (0.00 sec)
 
 7.	Wyświetl 3 książki od 20 do 50 zł, posortuj malejąco.
 mysql> select tytul,wydawnictwo,cena
@@ -38,12 +72,27 @@ mysql> select tytul,wydawnictwo,cena
     -> where cena between 20 and 50
     -> order by cena desc
     -> limit 3;
++------------------+-------------+-------+
+| tytul            | wydawnictwo | cena  |
++------------------+-------------+-------+
+| Ogniem i mieczem | Elipsa      | 46.00 |
+| Nad Niemnem      | PWN         | 40.00 |
+| Lalka            | Elipsa      | 35.00 |
++------------------+-------------+-------+
+3 rows in set (0.00 sec)
 
 8.	Wyświetl informację o wydawnictwach książek dla których w bazie danych jest co najmniej 2 tytuły książek.
 mysql> select count(tytul), wydawnictwo
     -> from ksiazki
     -> group by wydawnictwo
     -> having count(tytul)>=2;
++--------------+-------------+
+| count(tytul) | wydawnictwo |
++--------------+-------------+
+|            2 | Greg        |
+|            2 | Elipsa      |
++--------------+-------------+
+2 rows in set (0.00 sec)
 
 9.	Wyświetl informację o wydawnictwie książek dla których w bazie danych jest co najmniej 3 tytuły książek wydanych po roku 2015. 
 mysql> select count(tytul), wydawnictwo
@@ -51,48 +100,125 @@ mysql> select count(tytul), wydawnictwo
     -> where rok_wydania>2015
     -> group by wydawnictwo
     -> having count(tytul)>=3;
+Empty set (0.00 sec)
 
 10.	Wskaż ilość znaków w nazwisku klienta.
-mysql> select *, length(nazwisko) as ilosc
+mysql> select nazwisko, length(nazwisko) as ilosc
     -> from klient;
++------------+-------+
+| nazwisko   | ilosc |
++------------+-------+
+| Kozlowski  |     9 |
+| Pawlowska  |     9 |
+| Kasprzyk   |     8 |
+| Bialek     |     6 |
+| Wesolowski |    10 |
++------------+-------+
+5 rows in set (0.00 sec)
 
 11.	Wyświetl 4 znaki z nazwiska autora książek z prawej strony. 
-mysql> select *, right(nazwisko,4) as ilosc
+mysql> select nazwisko,right(nazwisko,4) as ilosc
     -> from autor;
++-------------+-------+
+| nazwisko    | ilosc |
++-------------+-------+
+| Mickiewicz  | wicz  |
+| Sienkiewicz | wicz  |
+| Orzeszkowa  | kowa  |
+| Prus        | Prus  |
+| Slowacki    | acki  |
++-------------+-------+
+5 rows in set (0.00 sec)
 
 12.	Zastosuj funkcje czasu w tabeli zamówienia.
-mysql> select data_zlozenia_zamowienia, monthname(data_zlozenia_zamowienia)
+mysql> select data_zlozenia_zamowienia, monthname(data_zlozenia_zamowienia) as nazwa_miesiaca
     -> from zamowienia;
++--------------------------+----------------+
+| data_zlozenia_zamowienia | nazwa_miesiaca |
++--------------------------+----------------+
+| 2020-02-18               | February       |
+| 2019-06-12               | June           |
+| 2022-09-21               | September      |
+| 2020-01-12               | January        |
+| 2021-12-05               | December       |
++--------------------------+----------------+
+5 rows in set (0.00 sec)
 
 13.	Policz numery zamówień klientów księgarni, dane pogrupuj według numerów klienta. 
 mysql> select count(id_zamowienia)
     -> from zamowienia
     -> group by id_klienta;
++----------------------+
+| count(id_zamowienia) |
++----------------------+
+|                    1 |
+|                    1 |
+|                    1 |
+|                    1 |
+|                    1 |
++----------------------+
+5 rows in set (0.00 sec)
 
 14.	Policz datę wydania książek wszystkich autorów zgromadzonych w bazie danych księgarnia. Dane pogrupuj według nazwisk autorów. 
 mysql> select nazwisko,tytul,count(rok_wydania) as policz
     -> from ksiazki,autor
     -> where ksiazki.id_autora=autor.id_autora
     -> group by nazwisko;
++-------------+------------------+--------+
+| nazwisko    | tytul            | policz |
++-------------+------------------+--------+
+| Mickiewicz  | Pan Tadeusz      |      1 |
+| Sienkiewicz | Ogniem i mieczem |      1 |
+| Orzeszkowa  | Nad Niemnem      |      1 |
+| Prus        | Lalka            |      1 |
+| Slowacki    | Kordian          |      1 |
++-------------+------------------+--------+
+5 rows in set (0.00 sec)
 
 15.	Policz wydania książek po roku 2014 pogrupuj według nazwisk autora. 
 mysql> select nazwisko,tytul,count(tytul) as policz
     -> from ksiazki,autor
     -> where ksiazki.id_autora=autor.id_autora and rok_wydania>2014
     -> group by nazwisko;
++----------+---------+--------+
+| nazwisko | tytul   | policz |
++----------+---------+--------+
+| Slowacki | Kordian |      1 |
++----------+---------+--------+
+1 row in set (0.00 sec)
 
 16.	Podaj średnią cenę książek z wydawnictwa PWN. Wyniki pogrupuj według tytułów książek.
 mysql> select tytul,avg(cena) as srednia
     -> from ksiazki
     -> where wydawnictwo='PWN'
     -> group by tytul;
++-------------+-----------+
+| tytul       | srednia   |
++-------------+-----------+
+| Nad Niemnem | 40.000000 |
++-------------+-----------+
+1 row in set (0.00 sec)
 
 17.	Policz zamówienia wysłane po roku 2016. Dane pogrupuj według sposobu płatności. 
 mysql> select count(zamowienia.data_wyslania) as policz
     -> from zamowienia, faktura
     -> where zamowienia.id_faktury=faktura.id_faktury
     -> group by faktura.sposob_platnosci;
++--------+
+| policz |
++--------+
+|      2 |
+|      1 |
+|      2 |
++--------+
+3 rows in set (0.00 sec)
 
 18.	Z ilu wydawnictw pochodzą książki dostępne w bazie danych?
 mysql> select count(distinct wydawnictwo) as liczba
     -> from ksiazki;
++--------+
+| liczba |
++--------+
+|      3 |
++--------+
+1 row in set (0.00 sec)
