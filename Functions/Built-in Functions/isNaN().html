@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Funkcje wbudowane - inNaN()</title>
+    </head>
+    <body>
+    <p>
+Funkcja sprawdza, czy wartość podana jako parametr nie jest liczbą. Za jej pomocą można sprawdzić czy funkcji parseInt() udało się zamienić podaną wartość na liczbę.<br>Funkcja zwraca wartość <b>true</b>, gdy argument wejściowy nie jest liczbą, lub <b>false</b>, gdy argument ten jest liczbą.<br>
+    </p>
+    <script>
+        document.write('isNaN(NaN); = ');
+         n1 = isNaN(NaN);
+         document.write(n1 + '<br>');
+         document.write('isNaN(567); = ');
+         n2 = isNaN(567);
+         document.write(n2 + '<br>');
+         document.write('isNaN(37.2); = ');
+         n3 = isNaN(37.2);
+         document.write(n3 + '<br>');
+         document.write('isNaN(parseInt("zx23")); = ');
+         n4 = isNaN(parseInt("zx23"));
+         document.write(n4 + '<br>');
+    </script>
+    </body>
+</html>
