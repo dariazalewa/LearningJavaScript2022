@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Funkcje wbudowane - inNaN()</title>
+    </head>
+    <body>
+    <p>
+Funkcja sprawdza, czy wartość podana jako parametr to liczba różna od <b>Infinity</b> oraz od NaN. Gdy argument wejściowy ma wartość <b>Infinity</b> lub <b>NaN</b>, funkcja zwraca <u>false</u>, a gdy argument ten jest liczbą, zwraca <u>true</u>.
+    </p>
+    <script>
+        document.write('isFinite(Infinity); = ');
+         f1 = isFinite(Infinity);
+         document.write(f1 + '<br>');
+         document.write('isFinite(-Infinity); = ');
+         f2 = isFinite(-Infinity);
+         document.write(f2 + '<br>');
+         document.write('isFinite(67); = ');
+         f3 = isFinite(67);
+         document.write(f3 + '<br>');
+         document.write('isFinite(2E12); = ');
+         f4 = isFinite(2E12);
+         document.write(f4 + '<br>');
+    </script>
+    </body>
+</html>
