@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Funkcje wbudowane - parseInt()</title>
+    </head>
+    <body>
+    <p>
+Funkcja pobiera argument dowolnego typu (najczęściej tekstowego) i zamienia go na liczbę. Gdy operacja nie powiedzie się, zwraca wartość NaN(oznacza, że wartość nie jest liczbą).<br>
+Funkcja może pobierać jeszcze jeden argument, określający podstawę liczby (dziesiętna,szesnastkowa,binarna).<br>Jeżeli ten argument <b>nie zostanie podany</b>, domyślnie podstawa jest <b>dziesiętna</b>.<br>
+Ale jeżeli pierwszy argument zaczyna się od <b>0x</b>, podstawa będzie <b>szesnastkowa</b>.<br>Natomiast gdy zaczyna się od <b>0</b>, podstawa będzie <b>ósemkowa</b>.
+    </p><br>
+    <script>
+        document.write('parseInt("123"); = ');
+         c1 = parseInt("123");
+         document.write(c1 + '<br>');
+         document.write('parseInt("123AB", 16); = ');
+         c2 = parseInt("123AB", 16);
+         document.write(c2 + '<br>');
+         document.write('parseInt("123", 8); = ');
+         c3 = parseInt("123", 8);
+         document.write(c3 + '<br>');
+         document.write('parseInt("123AB", 8); = ');
+         c4 = parseInt("123AB", 8);
+         document.write(c4 + '<br>');
+         document.write('parseInt("0377", 8); = ');
+         c5 = parseInt("0377", 8);
+         document.write(c5 + '<br>');
+         document.write('parseInt("0x373"); = ');
+        c6 = parseInt("0x373");
+         document.write(c6 + '<br><br>');
+
+         var e1 = "16";
+         var e2 = "64";
+         var wynik = e1 + e2;
+         document.write("Zwykłe dodawanie ciągów: e1 + e2 = ");
+         document.write(wynik);
+         document.write("<br />");
+
+         e1 = parseInt(e1);
+         e2 = parseInt(e2);
+         wynik = e1 + e2;
+
+         document.write("Dodawanie po konwersji na liczby: e1 + e2 = ");
+         document.write(wynik);
+         document.write("<br>");
+    </script>
+    </body>
+</html>
