@@ -6,15 +6,15 @@
     </head>
     <body>
     <script>
-        function Klient(nazwisko, imie) {
-            this.nazwisko_k = nazwisko;
-            this.imie_k = imie;
+        function Osoba(nazwisko, imie) {
+            this.nazwisko_o = nazwisko;
+            this.imie_o = imie;
         }
-        Klient.prototype.zawod = 'kierowca';
-        Klient.prototype.pisz_dane = function() {
-            document.write(this.nazwisko_k + ' ' + this.imie_k);
+        Osoba.prototype.zawod = 'informatyk';
+        Osoba.prototype.pisz_dane = function() {
+            document.write(this.nazwisko_o + ' ' + this.imie_o);
         }
-        var osoba1 = new Klient("Mazurek","Stanisław","kierowca");
+        var osoba1 = new Osoba("Mazurek","Stanisław","informatyk");
         osoba1.pisz_dane();
     </script>
     </body>
