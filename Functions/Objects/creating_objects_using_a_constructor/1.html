@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Tworzenie obiektów z użyciem konstruktora ze słowem new.</title>
+    </head>
+    <body>
+    <script>
+      function Uczen(nazwisko, imie, wiek, klasa, sport) {
+        this.nazwisko_u = nazwisko;
+        this.imie_u = imie;
+        this.wiek_u = wiek;
+        this.klasa_u = klasa;
+        this.sport_u = sport;
+        this.wypisz = function() {
+            document.write(this.nazwisko_u + ' ' + this.imie_u + ' ' + this.wiek_u + ' lat, sport: ' + this.sport_u + '.' + "<br>");
+        }
+      }
+
+      var uczen1 = new Uczen("Pawlik", "Adam", 12, "5b", "tenis");
+      var uczen2 = new Uczen("Mazur", "Weronika", 13, "6a", "pływanie");
+      var uczen3 = new Uczen("Andrzejewski", "Wojciech", 13, "6a", "siatkówka");
+      var uczen4 = new Uczen("Wójcik", "Wiktoria", 12, "5c", "gimnastyka");
+      var uczen5 = new Uczen("Orzechowski", "Jakub", 13, "6b", "pływanie");
+
+      uczen1.wypisz();
+      uczen2.wypisz();
+      uczen3.wypisz();
+      uczen4.wypisz();
+      uczen5.wypisz();
+    </script>
+    </body>
+</html>
