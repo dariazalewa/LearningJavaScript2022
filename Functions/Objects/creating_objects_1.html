@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Tworzenie obiektów - osoba</title>
+    </head>
+    <body>
+    <script>
+        var osoba = {
+            nazwisko: "Nowak",
+            imie: "Filip",
+            zawod: "informatyk",
+            pokaz: function() {
+                document.write(this.nazwisko +' '+this.imie);
+            }
+        };
+        osoba.pokaz();
+        document.write('<br>');
+        osoba.wiek = 19;
+        osoba.wypisz_wiek = function() {
+        document.write('Wiek: ' + this.wiek + ' lat.');
+    }
+        osoba.wypisz_wiek();
+    </script>
+    </body>
+</html>
