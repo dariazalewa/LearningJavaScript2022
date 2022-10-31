@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Zasięg blokowy - Block Scope</title>
+    </head>
+    <body>
+        <p>
+Zasięg zmiennej jest to obszar, w którym można odwołać się bezpośrednio do zmiennej. Zmianna może być <b>lokalna lub globalna</b>.<br>
+Zmienne <b>globalne</b>(Global scope) są widoczne w całym skrypcie, zostały one zdefiniowane poza funkcją.<br>
+Zmienne <b>lokalne</b>(Local scope) mają zasięg lokalny i są widoczne w funkcji, w której zostały zdefiniowane. Jeżeli zmienna zostanie zadeklarowana bez użycia słowa kluczowego <b>var</b>, będzie miała zasięg globalny.<br>
+Zadeklarowanie zmiennej za pomocą słowa kluczowego <b>let</b> powoduje, że taka zmienna ma <b>zasięg blokowy</b>. Oznacza to, że jest widoczna w bloku otoczonym nawiasami klamrowymi <b>{}</b>.
+        </p>
+        <script>
+            let a = 10;
+            {
+                let a = 15;
+                document.write("Zmienna w bloku: " + a +"<br>");
+            }
+            document.write("Zmienna globalna: " + a);
+        </script>
+    </body>
+</html>
