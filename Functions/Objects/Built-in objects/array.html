@@ -23,7 +23,7 @@
     for (var i = 0; i < imie.length; i++) {
         document.write(imie[i] + "<br>");
     }
-    document.write("<br>Tablice wielowymiarowe <br>");
+    document.write("<br>Tablice wielowymiarowe: <br>");
     var osoby = [];
     osoby[0] = ['Adam','Pawlik'];
     osoby[1] = ['Weronika','Mazur'];
@@ -33,7 +33,12 @@
     document.write('Imię: ' + osoby[0][0] + ', nazwisko: ' + osoby[0][1] + "<br>.");
     document.write('Imię: ' + osoby[1][0] + ', nazwisko: ' + osoby[1][1] + "<br>.");
     document.write('Imię: ' + osoby[2][0] + ', nazwisko: ' + osoby[2][1] + "<br>.");
-    document.write('Imię: ' + osoby[3][0] + ', nazwisko: ' + osoby[3][1]);
+    document.write('Imię: ' + osoby[3][0] + ', nazwisko: ' + osoby[3][1] + "<br>.");
+
+    document.write("<br>Łączenie elementów tablicy: <br>");
+    var Tablica = new Array('Anna','Katarzyna','Zbigniew');
+    document.write(Tablica.join() + "<br>");
+    document.write(Tablica.join(" - ") + "<br>");
     </script>
     </body>
 </html>
