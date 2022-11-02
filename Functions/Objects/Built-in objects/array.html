@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Obiekty wbudowane - Array(tablica).</title>
+    </head>
+    <body>
+    <script>
+    document.write("Tablice służą do przechowywania wielu zmiennych.<br> Aby utworzyć nową tablicę, należy zadeklarować obiekt Array w postaci:<br> var nazwaTablicy = new Array();<br> lub <br> var nazwaTablicy = [];<br>");
+    var tab1 = new Array(10); // tabela zawiera 10 pustych elementów
+    var tab2 = [2]; //tabela zawiera jeden element o wartości 2
+    var tab3 = new Array('Anna', 'Marcin', 'Piotr', 'Barbara'); //tabela ma podane konkretne wartości
+    var tab4 = ['Paweł', 'Łukasz', 'Alicja']; // tutaj również
+    document.write("<br>Wyświetlenie z tabeli 3 wartość o indeksie 2: ");
+    document.write(tab3[2] +"<br>"); //wyświetli z tabeli 3 wartość o indeksie 2, czyli Piotr(bo on liczy od 0,1,2...)
+    document.write("<br>Dodawanie nowej wartości do tablicy: <br>");
+    var tab5 = ['Gupik','Złota rybka','Bojownik'];
+    tab5[3] = 'Paletka zielona'; //aby przypisać dodajemy po prostu odpowiedni indeks
+    tab5[4] = 'Glonojad';
+    document.write("Najlepsze rybki do akwarium to: " + tab5[2] +", " + tab5[3] + ", " + tab5[4] +".<br>");
+    document.write("<br>");
+    var imie = ['Anna', 'Marcin', 'Piotr', 'Barbara','Paweł', 'Łukasz', 'Alicja']; //length przydaje się jak chcemu utwozyć pętle odczytującą wszystkie elementy tablicy
+    for (var i = 0; i < imie.length; i++) {
+        document.write(imie[i] + "<br>");
+    }
+    document.write("<br>Tablice wielowymiarowe <br>");
+    var osoby = [];
+    osoby[0] = ['Adam','Pawlik'];
+    osoby[1] = ['Weronika','Mazur'];
+    osoby[2] = ['Wojciech','Andrzejewski'];
+    osoby[3] = ['Wiktoria','Orzechowska'];
+
+    document.write('Imię: ' + osoby[0][0] + ', nazwisko: ' + osoby[0][1] + "<br>.");
+    document.write('Imię: ' + osoby[1][0] + ', nazwisko: ' + osoby[1][1] + "<br>.");
+    document.write('Imię: ' + osoby[2][0] + ', nazwisko: ' + osoby[2][1] + "<br>.");
+    document.write('Imię: ' + osoby[3][0] + ', nazwisko: ' + osoby[3][1]);
+    </script>
+    </body>
+</html>
