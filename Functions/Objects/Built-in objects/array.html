@@ -45,6 +45,19 @@
     document.write(Tablicaa.join() + "<br>");
     Tablicaa.reverse()
     document.write(Tablicaa.join() + "<br>");
+
+    document.write("<br>Sortowanie: <br>"); //sort()
+    function porownaj(a,b) {
+        return a - b;
+    }
+    var tablicaaa = new Array(496, 1290, 1887, 42, 10, 273);
+    document.write('Bez sortowania: ' + tablicaaa.join());
+    document.write("<br>" + 'Sortowanie domyślne: ');
+    tablicaaa.sort();
+    document.write(tablicaaa.join());
+    document.write("<br>" + 'Sortowanie poprawne: ');
+    tablicaaa.sort(porownaj);
+    document.write(tablicaaa.join());
     </script>
     </body>
 </html>
