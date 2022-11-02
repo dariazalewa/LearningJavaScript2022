@@ -35,10 +35,16 @@
     document.write('Imię: ' + osoby[2][0] + ', nazwisko: ' + osoby[2][1] + "<br>.");
     document.write('Imię: ' + osoby[3][0] + ', nazwisko: ' + osoby[3][1] + "<br>.");
 
-    document.write("<br>Łączenie elementów tablicy: <br>");
+    document.write("<br>Łączenie elementów tablicy: <br>"); //join()
     var Tablica = new Array('Anna','Katarzyna','Zbigniew');
     document.write(Tablica.join() + "<br>");
     document.write(Tablica.join(" - ") + "<br>");
+    
+    document.write("<br>Odwracanie kolejności elementów tablicy: <br>"); //reverse()
+    var Tablicaa = new Array('Maria','Tomasz','Henryk');
+    document.write(Tablicaa.join() + "<br>");
+    Tablicaa.reverse()
+    document.write(Tablicaa.join() + "<br>");
     </script>
     </body>
 </html>
