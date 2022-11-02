@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Obiekty wbudowane - string(łańcuch tekstowy).</title>
+    </head>
+    <body>
+    <script>
+        document.write("String ma właściwość, length, określającą długość łańcucha.<br>");
+        var tekst="Podziękujesz ty mi jeszcze lepiej niezadługo i ja tobie podziękuję za to, że ty mnie mołodycię z Rozłogów do Baru przywiódł. Tam ja ją znalazł, a teraz ot! na wesele by ciebie prosił, ale to nie dziś i nie jutro — teraz wojna, a ty stary człowiek, może nie dożyjesz.";
+        var dlug=tekst.length;
+        document.write("Tekst: " + tekst +"<br>Długość tekstu: " + dlug + "<br>");
+        document.write("<br>Obiekt String ma dwa typy metod.<br> Pierwszy odnosi się do utworzonego łańcucha, przykładem jest metoda <b>substring()</b>, która zwraca podzbiór tego łańcucha.<br> Jej parametry określają położenie początku i końca podzbioru.");
+        var tekst1="Żeby ja ciebie nie pokochał, byłby ja wolny jak wiatr w polu i na sercu swobodny, i na duszy swobodny, a sławny jak sam Konasewicz Sahajdaczny. Twoje to liczko mnie nieszczęście, twoje to oczy mnie nieszczęście; ni mnie wola miła, ni sława kozacza!";
+        var dlug1=tekst1.substring(15,19);
+        document.write("<br>" + tekst1 + "<br>" + dlug1 + "<br>");
+        document.write("<br>Metodami, które wykorzystać można do zmiany wielkości liter:<br> ·toUpperCase() - zmienia wszystkie litery na DUŻE,<br> ·toLowerCase() - zmienia wszystkie litery na małe.");
+        var tekst2="Zdechnę, ja i pchły moje!";
+        var x=tekst2.toUpperCase();
+        var y=tekst2.toLowerCase();
+        document.write("<br>Tekst: " + tekst2 + "<br>Wielkie litery: " + x + "<br>Małe litery: " + y + "<br>");
+        document.write("<br>Do obiektu String możemy dołączyć dodatkową funkcję.<br> Metoda <b>charAt()</b> zwraca znak z pierwszej pozycji łańcucha znaków. Natomiast metoda <b>substr()</b> zwraca podzbiór łańcucha znaków.<br>");
+        String.prototype.duzaLitera = function() {
+            return this.charAt(0) .toUpperCase() + this.substr(1);
+        }
+        var tx1 = 'czy to ja chłop, żeby ją bez popa niewolił, albo mnie nie stać na to, żeby ja w Kijowie ślub brał?';
+        document.write("Przed: " + tx1 + "<br>Po: " + tx1.duzaLitera());
+    </script>
+    </body>
+</html>
