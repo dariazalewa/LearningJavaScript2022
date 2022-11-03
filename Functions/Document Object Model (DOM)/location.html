@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Obiekty przeglądarki - location</title>
+    </head>
+    <body>
+        <p id="demo"></p>
+        <script>
+            document.getElementById("demo").innerHTML = "Zawiera cały adres URL:<br>" + window.location.href; 
+            document.getElementById("demo").innerHTML = "Zawiera nazwę hosta: " + window.location.hostname; 
+            document.getElementById("demo").innerHTML = "Zawiera nazwę pliku ze ścieżką: " + window.location.pathname;
+            document.getElementById("demo").innerHTML = "Zawiera numer portu: " + window.location.port;
+            document.getElementById("demo").innerHTML = "Zawiera zapytanie, jeżeli znajduje się onow adresie: " + window.location.search;
+            document.getElementById("demo").innerHTML = "Zawiera nazwę kotwicy, jeżeli kotwica występuje w adresie: " + window.location.hash;
+            document.getElementById("demo").innerHTML = "Zawiera protokół: " + window.location.protocol;
+        </script>
+    </body>
+</html>
