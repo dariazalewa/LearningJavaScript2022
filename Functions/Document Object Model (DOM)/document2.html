@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Obiekty przeglądarki - document(zmiania tekstu przez przycisk)</title>
+    </head>
+    <body>
+    <script>
+     function zmien_tekst () {
+        document.getElementById("blok").innerHTML = '— A co ty myślał? — mówił Bohun. — Czy to ja chłop, żeby ją bez popa niewolił, albo mnie nie stać na to, żeby ja w Kijowie ślub brał? Nie dla chłopa ty ją do Baru przywiódł, ale dla atamana i hetmana…';
+     }
+    </script>
+    <p>
+        Ogniem i mieczem t.II r.VII: <b id="blok"> - Podziękujesz ty mi jeszcze lepiej niezadługo i ja tobie podziękuję za to, że ty mnie mołodycię z Rozłogów do Baru przywiódł. Tam ja ją znalazł, a teraz ot! na wesele by ciebie prosił, ale to nie dziś i nie jutro — teraz wojna, a ty stary człowiek, może nie dożyjesz.<br>— Na wesele? — mruknął.</b>
+    </p>
+    <input type="button" onclick="zmien_tekst ()" value="Zmień tekst:"/>
+    </body>
+</html>
