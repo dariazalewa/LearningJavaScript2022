@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Sprawdzanie wypełnienia pół formularza</title>
+        <script>
+            function sprawdz(form) {
+                if (document.getElementById('nazw').value.length < 3){
+                  alert('Pole Nazwisko musi mieć co najmniej 3 znaki!!!');
+                  form.nazw.focus();
+                  return false;
+                }
+                if (document.getElementById('imie').value.length < 4){
+                  alert('Pole Imię musi mieć co najmniej 4 znaki!!!');
+                  form.imie.focus();
+                  return false;
+                }
+                if (form.zawod.value == ''){
+                  alert('Pole Zawód musi być wypełnione!!!');
+                  form.zawod.focus();
+                  return false;
+                }
+                return true;
+            }
+        </script>
+        <style type="text/css">
+         div {
+            width: 400px;
+            background-color: #8e9caa;
+            padding: 10px;
+         }
+        .pole {
+            position: absolute;
+            left: 90px;
+         }
+        #ak1 {
+            font-size: 14pt;
+        }
+        </style>
+    </head>
+    <body>
+    <div>
+        <form enctype="text/plain" action=" " method="post" onsubmit="return sprawdz(this);">
+        <p id="akt1"> Dane osobowe </p>
+        <b> Nazwisko: </b>
+        <input class="pole" id="nazw" name="nazw" value="" size="40"><br>
+        <b> Imię: </b>
+        <input class="pole" id="imie" name="imie" value="" size="40"><br>
+        <b> Zawód: </b>
+        <input class="pole" id="zawod" name="zawod" value="" size="40"><br><br>
+        <label> Pracuję: <input type="checkbox" name="opcje" maxlength="1"></label><br><br>
+        <input type="submit" value="Wyślij">
+        </form>
+    </div>
+    </body>
+</html>
