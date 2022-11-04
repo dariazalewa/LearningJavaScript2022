@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Sprawdzanie pół formularza po wypełnieniu</title>
+        <script>
+            function adres() {
+                if (document.getElementById('mail').value != 'e-mail'){
+                    alert('Wpisz tekst: "e-mail"');
+                }
+                return false;
+            }
+        </script>
+        <style type="text/css">
+        .pole {
+            position: absolute;
+            left: 90px;
+        }
+        </style>
+    </head>
+    <body bgcolor="#dfdfdf">
+    <form action="" method="post">
+        <b> Nazwisko: </b>
+        <input class="pole" name="nazw" id="nazw" value="" size="40"><br>
+        <b>E-Mail:</b>
+        <input class="pole" name="mail" id="mail" value="" size="40" onblur="return adres()"><br>
+        <b> Zawód: </b>
+        <input class="pole" name="zawod" id="zawod" value="" size="40"><br><br>
+        <center><input type="submit" value="Wyślij"></center> &nbsp; &nbsp;
+    </form>
+    </body>
+</html>
