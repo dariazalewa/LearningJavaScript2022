@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Zerowanie pól formularza</title>
+        <script>
+            function zeruj() {
+                document.getElementById("form1").reset();
+            }
+        </script>
+        <style type="text/css">
+         div {
+            width: 400px;
+            background-color: rgb(172, 80, 11);
+            padding: 10px;
+         }
+         .pole {
+            position: absolute;
+            left: 130px;
+         }
+        </style>
+    </head>
+    <body>
+    <p> Wprowadź swoje dane: </p>
+    <div>
+    <form id="form1">
+    Imię: <input class="pole" type="text" name="imie"><br>
+    Nazwisko: <input class="pole" type="text" name="nazw"><br><br>
+    <center><input type="button" onclick="zeruj()" value="Wyczyść dane"></center>
+    </form>
+    </div>
+    </body>
+</html>
