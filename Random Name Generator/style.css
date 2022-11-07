@@ -1,0 +1,21 @@
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 1rem;
+    display: grid;
+    place-items: center;
+    font-family: system-ui;
+    background-color: rgb(167, 159, 208);
+  }
+  h1 {
+    background: #b6e1c9;
+    padding: 1rem 2rem;
+    text-align: center;
+  }
+  span {
+    display: block;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: normal;
+    font-family: monospace;
+  }
