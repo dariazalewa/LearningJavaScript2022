@@ -1,0 +1,84 @@
+.container {
+border: 1px solid #dedbdb;
+box-shadow: 10px 10px 30px 0px rgba(0,0,0,0.75);    
+border-radius: 20px;    
+position: absolute;    
+top: 55%;       
+left: 50%;
+transform: translate(-50%, -50%);
+width: 450px;
+height: 400px;        
+}   
+    
+.keys {
+display: grid;    
+grid-template-columns: repeat(4, 1fr);    
+grid-gap: 10px;    
+padding: 10px;    
+margin: auto;    
+}
+    
+.button {   
+height: 60px;    
+padding: 5px;    
+background-color: #395f2a;    
+border-radius: 3px;    
+border: 1px solid #2f4d23;    
+background-color: transparent;    
+font-size: 2rem;    
+color: #000;    
+box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 1px 0 0 rgba(255,255,255,.45), inset 0 -1px 0 0 rgba(255,255,255,.15), 0 1px 0 0 rgba(255,255,255,.15);
+text-shadow: 0 1px rgba(255,255,255,.4);
+}
+    
+.button:hover {
+background-color: #79a16a;
+}    
+    
+.operator {
+color: #fff;
+background-color:#144e0e;
+}    
+    
+.clear {
+background-color: #821b1e;
+border-color: #731518;
+color: #fff;
+width: 80px;
+height: 30px;  
+}
+    
+.clear:hover {
+background-color: #aa2429;
+}
+    
+.equal-sign {
+background-color: #196210;
+border-color: #000000;
+color: #fff;
+}
+    
+.equal-sign:hover {
+background-color: #79a16a;
+}
+    
+.screen{    
+background-color:#79a16a;    
+justify-content: left;    
+color: black;
+font-size: medium;
+width: 50%;
+height: 30%;    
+cursor: default;
+padding: 10px;    
+padding-left: 40%;
+margin: auto;    
+margin-bottom: 10px;
+}        
+
+    
+
+    
+
+    
+
