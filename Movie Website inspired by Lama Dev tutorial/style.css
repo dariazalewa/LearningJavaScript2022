@@ -3,7 +3,7 @@
 }
 
 body{
-    font-family: Times, sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .navbar{ 
@@ -11,6 +11,59 @@ body{
     height: 50px;
     background-color: black;
 }
+
+.navbar-container{
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+    height: 100%;
+    color: white;
+    font-family: 'Sen', sans-serif;
+}
+
+.menu-list {
+    display: flex;
+    list-style: none;
+}
+  
+.menu-list-item {
+    margin-right: 30px;
+}
+  
+.menu-list-item.active {
+    font-weight: bold;
+}
+
+.logo-container{
+    flex: 1;
+}
+
+.logo {
+    font-size: 30px;
+    color: #729ddb;
+}
+
+.menu-container{
+    flex: 6;
+}
+
+.profile-container{
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.profile-text-container {
+    margin: 0 10px;
+  }
+
+.profile-picture {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 
 .sidebar{
     width: 50px;
