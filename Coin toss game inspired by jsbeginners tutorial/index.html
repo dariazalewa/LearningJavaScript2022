@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Rzut monetą</title>
+</head>
+<body>
+    <div class="canvas">
+        <h1>Ososba, która zdobędzie 5 punktów jako pierwsza wygrywa!</h1>
+        <div class="selection">Wybór Gracza: <span id="player-selection"></span></div><div class="selection">Wybór Komputera: <span id="computer-selection"></span></div>
+        <div id="center">
+                <div id="winner"></div>
+                <div id="image"></div>
+        </div>
+        
+        <div>
+            <div id="player">Gracz: <span id="player-score">0</span></div>
+            <div id="computer">Komputer: <span id="computer-score">0</span></div>
+        </div>
+        <div>
+            <h2>Orzeł czy reszka?</h2>
+            <button id="heads">Orzeł</button>
+            <button id="tails">Reszka</button>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
