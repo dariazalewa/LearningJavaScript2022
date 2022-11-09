@@ -118,3 +118,29 @@ body{
 .content-container {
     margin-left: 50px;
 }
+
+.featured-content {
+    height: 50vh;
+    padding: 50px;
+}
+
+.featured-title {
+    width: 450px;
+}
+  
+.featured-desc {
+    width: 1000px;
+    color: lightgray;
+    margin: 30px 0;
+}
+  
+.featured-button {
+    background-color: #652b75;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-weight: bold;
+}
+  
