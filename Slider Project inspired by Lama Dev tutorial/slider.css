@@ -13,23 +13,19 @@ body{
 }
   
 .top{
+   margin-top: 5%;
    display: flex;
    align-items: center;
    gap: 50px;
 }
   
 .arrow{
-   height: 150px;
+   height: 100px;
    cursor: pointer;
 }
   
-.right{
-   transform: rotate(180deg);
-  }
-  
 .frame{
    width: 800px;
-   height: 500px;
    overflow: hidden;
 }
   
