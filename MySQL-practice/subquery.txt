@@ -1,0 +1,193 @@
+                                  Podzapytania
+1. Sprawdź, które ceny książek mają cenę wyższą niż minimalna cena książek.
+mysql> select tytul, cena
+    -> from ksiazki
+    -> where cena>
+    -> (select min(cena) from ksiazki);
++------------------+-------+
+| tytul            | cena  |
++------------------+-------+
+| Ogniem i mieczem | 46.00 |
+| Nad Niemnem      | 40.00 |
+| Lalka            | 35.00 |
+| Kordian          | 35.00 |
++------------------+-------+
+4 rows in set (0.03 sec)
+
+2. Sprawdź, które książki mają mniejszą cenę niż maksymalna.
+mysql> SELECT tytul, cena, wydawnictwo
+    -> from ksiazki
+    -> where cena<
+    -> (select max(cena) from ksiazki);
++-------------+-------+-------------+
+| tytul       | cena  | wydawnictwo |
++-------------+-------+-------------+
+| Pan Tadeusz | 33.00 | Greg        |
+| Nad Niemnem | 40.00 | PWN         |
+| Lalka       | 35.00 | Elipsa      |
+| Kordian     | 35.00 | Greg        |
++-------------+-------+-------------+
+4 rows in set (0.00 sec)
+
+3. Wyświetl wszystkie osoby co zamówiły w księgarni.
+mysql> select klient.nazwisko, klient.imie
+    -> from klient
+    -> where exists
+    -> (select * from zamowienia where klient.id_klienta=zamowienia.id_klienta);
++------------+-----------+
+| nazwisko   | imie      |
++------------+-----------+
+| Kozlowski  | Artur     |
+| Pawlowska  | Marta     |
+| Kasprzyk   | Amelia    |
+| Bialek     | Krzysztof |
+| Wesolowski | Jan       |
++------------+-----------+
+5 rows in set (0.03 sec)
+
+4. Wyświetla tytuł danej książki i id w bazie jej autora.
+mysql> SELECT ksiazki.id_autora, ksiazki.tytul
+    -> from ksiazki
+    -> where exists
+    -> (select * from autor where ksiazki.id_autora=autor.id_autora);
++-----------+------------------+
+| id_autora | tytul            |
++-----------+------------------+
+|         1 | Pan Tadeusz      |
+|         2 | Ogniem i mieczem |
+|         3 | Nad Niemnem      |
+|         4 | Lalka            |
+|         5 | Kordian          |
++-----------+------------------+
+5 rows in set (0.00 sec)
+
+5. Wyświetl nazwisko i imię klienta, gdzie ma id 3 w tabeli zamówienia.
+mysql> select klient.nazwisko, klient.imie
+    -> from klient
+    -> where klient.id_klienta=
+    -> (select zamowienia.id_klienta from zamowienia where zamowienia.id_klienta=3);
++----------+--------+
+| nazwisko | imie   |
++----------+--------+
+| Kasprzyk | Amelia |
++----------+--------+
+1 row in set (0.00 sec)
+
+6. Wyświetlenie książki oraz wydawnictwa autora o id = 2.
+mysql> SELECT ksiazki.tytul, ksiazki.wydawnictwo
+    -> from ksiazki
+    -> where ksiazki.id_autora=
+    -> (select autor.id_autora from autor where autor.id_autora=2);
++------------------+-------------+
+| tytul            | wydawnictwo |
++------------------+-------------+
+| Ogniem i mieczem | Elipsa      |
++------------------+-------------+
+1 row in set (0.01 sec) 
+
+7. Wyświtel wszystkie książki o cenie większej niż 'Lalka'.
+mysql> select tytul, cena
+    -> from ksiazki
+    -> where cena>any
+    -> (select cena from ksiazki where tytul='Lalka');
++------------------+-------+
+| tytul            | cena  |
++------------------+-------+
+| Ogniem i mieczem | 46.00 |
+| Nad Niemnem      | 40.00 |
++------------------+-------+
+2 rows in set (0.00 sec)
+
+8.  Wyświetl osoby, które nie mieszkają w Biłgoraju.
+mysql> SELECT klient.nazwisko, klient.imie
+    -> from klient
+    -> where miejscowosc>any
+    -> (select klient.miejscowosc from klient where miejscowosc='Warszawa');
++----------+--------+
+| nazwisko | imie   |
++----------+--------+
+| Kasprzyk | Amelia |
++----------+--------+
+1 row in set (0.00 sec)
+
+                                Podzapytania klauzuli FROM
+
+1. Tworzy tabelę wizualną "lista" dla książek wydanych po 2019, cenie większej od 20 i wydawnictwa "WWC".
+
+
+2. Tworzy tabelę wizualną "nazwa" dla klientów z Biłgoraja i nazwiska zaczynającego się od M.
+mysql> select nazwa.nazwisko, nazwa.imie
+    -> from
+    -> (select nazwisko, imie, miejscowosc from klient where miejscowosc="Bilgoraj" and nazwisko like 'M%') as nazwa;
++----------+-------+
+| nazwisko | imie  |
++----------+-------+
+| Mysz     | Edyta |
++----------+-------+
+1 row in set (0.02 sec)
+
+                             Podzapytania w instrukcjach modyfikujących dane
+
+1. Tworzenie tabeli "archiwum", która zawiera imiona i nazwisko klientów oraz date złożenia przez nich zamowienia.
+a) Utworzenie tabeli "archiwum":
+mysql> create table archiwum
+    -> (
+    -> nazwisko char(60),
+    -> imie char(40),
+    -> data_zlozenia_zamowienia date
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+b) Dodajemy do tabeli dane z innych tabel:
+mysql> insert into archiwum(nazwisko,imie,data_zlozenia_zamowienia)
+    -> (select klient.nazwisko, klient.imie, zamowienia.data_zlozenia_zamowienia
+    -> from klient,zamowienia
+    -> where klient.id_klienta=zamowienia.id_klienta);
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+c) Tabela działa:
+mysql> select * from archiwum;
++----------+---------+--------------------------+
+| nazwisko | imie    | data_zlozenia_zamowienia |
++----------+---------+--------------------------+
+| Bomba    | Kapitan | 2024-01-20               |
+| Bomber   | Janusz  | 2025-05-20               |
+| Maurycy  | Kuba    | 2022-03-20               |
+| Blaszka  | Kubus   | 2016-09-20               |
+| Mysz     | Edyta   | 2016-07-20               |
++----------+---------+--------------------------+
+5 rows in set (0.00 sec)
+
+2. Tworzenie tabeli "pisarze", która zawiera imiona i nazwisko autorów, tytuł ich działa oraz wydawnictwo.
+a) Utworzenie tabeli "pisarze":
+mysql> create table pisarze
+    -> (
+    -> nazwisko char(60),
+    -> imie char(40),
+    -> tytul char(40),
+    -> rok_wydania date,
+    -> wydawnictwo char(40)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+b) Dodajemy do tabeli dane z innych tabel:
+mysql> insert into pisarze(nazwisko,imie,tytul,wydawnictwo)
+    -> (select autor.nazwisko, autor.imie, ksiazki.tytul, ksiazki.wydawnictwo
+    -> from autor, ksiazki
+    -> where autor.id_autora=ksiazki.id_autora);
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+c) Tabela działa:
+mysql> select* from pisarze;
++-------------+--------+--------------+-------------+
+| nazwisko    | imie   | tytul        | wydawnictwo |
++-------------+--------+--------------+-------------+
+| Mickiewicz  | Adam   | Dziady       | SNP         |
+| Luther      | Zack   | Road to God  | SNP         |
+| Orzech      | Michal | The cucumber | WWC         |
+| Sienkiewicz | Henry  | The Nothing  | ABC         |
+| Cena        | John   | The old END  | CBA         |
++-------------+--------+--------------+-------------+
+5 rows in set (0.00 sec)
