@@ -1,0 +1,68 @@
+1. Stworzenie wyzwalacza do tabeli 'pracownik', aby dodać do kolumny data_dodania aktualny czas.
+
+a) Tworzymy tabele pracownik:
+mysql> create table pracownik
+    -> (
+    -> id_pracownika int(5) not null,
+    -> imie char(20) not null,
+    -> nazwisko char(30) not null,
+    -> pensja float(7,2) not null,
+    -> data_dodania datetime,
+    -> data_nod datetime,
+    -> pop_pensja float,
+    -> primary key(id_pracownika)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+b) Tworzymy wyzwalacz dodający czas:
+mysql> delimiter //
+mysql> create trigger data_dodania
+    -> BEFORE INSERT ON pracownik
+    -> FOR EACH ROW BEGIN
+    -> SET NEW.data_dodania=now();
+    -> end //
+Query OK, 0 rows affected (0.00 sec)
+
+c) Dodajemy pierwsze rekordy do tabeli:
+mysql> insert into pracownik(id_pracownika,imie,nazwisko,pensja)
+    -> values('1','Jan','Nowak',3000); //
+Query OK, 1 row affected (0.02 sec)
+
+d) Sprawdzamy co jest już w tabeli:
+mysql> select * from pracownik;
+    -> //
++---------------+------+----------+---------+---------------------+----------+------------+
+| id_pracownika | imie | nazwisko | pensja  | data_dodania        | data_nod | pop_pensja |
++---------------+------+----------+---------+---------------------+----------+------------+
+|             1 | Jan  | Nowak    | 3000.00 | 2022-11-17 12:37:22 | NULL     |       NULL |
++---------------+------+----------+---------+---------------------+----------+------------+
+1 row in set (0.00 sec)
+
+e) Tworzymy wyzwalacz modyfikujący pensję:
+mysql> delimiter //
+mysql> create trigger modyfikacja
+    -> BEFORE UPDATE on pracownik
+    -> FOR EACH ROW BEGIN
+    -> SET NEW.data_dodania=now();
+    -> if NEW.pensja!=OLD.pensja THEN
+    -> set NEW.pop_pensja=OLD.pensja;
+    -> end if;
+    -> end //
+Query OK, 0 rows affected (0.00 sec)
+
+f) Aktualizujemy pensję pracownika:
+mysql> Update pracownik set pensja=3500
+    -> where id_pracownika=1;
+    -> //
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+g) Patrzymy zmiany w tabeli:
+mysql> Select * from pracownik;
+    -> //
++---------------+------+----------+---------+---------------------+----------+------------+
+| id_pracownika | imie | nazwisko | pensja  | data_dodania        | data_nod | pop_pensja |
++---------------+------+----------+---------+---------------------+----------+------------+
+|             1 | Jan  | Nowak    | 3500.00 | 2022-11-17 13:08:49 | NULL     |       3000 |
++---------------+------+----------+---------+---------------------+----------+------------+
+1 row in set (0.00 sec)
