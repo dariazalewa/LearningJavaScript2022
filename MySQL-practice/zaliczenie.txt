@@ -1,0 +1,173 @@
+Ćwiczenia praktyczne
+1.	Policz klientów z bazy danych księgarnia.
+mysql> select count(*) from klient;
++----------+
+| count(*) |
++----------+
+|        5 |
++----------+
+1 row in set (0.00 sec)
+
+2.	Podaj średnią cenę książek w bazie danych. 
+mysql> select avg(cena) from ksiazki;
++-----------+
+| avg(cena) |
++-----------+
+| 37.800000 |
++-----------+
+1 row in set (0.01 sec)
+
+3.	Policz tytuły książek wydanych powyżej 2000roku. 
+mysql> select count(tytul) from ksiazki where rok_wydania>2000;
++--------------+
+| count(tytul) |
++--------------+
+|            1 |
++--------------+
+1 row in set (0.00 sec)
+
+4.	Wyświetl  z tabeli autor 3 rekordy począwszy od 3.
+mysql> select * from autor limit 2,3;
++-----------+------------+----------+
+| id_autora | nazwisko   | imie     |
++-----------+------------+----------+
+|         3 | Orzeszkowa | Eliza    |
+|         4 | Prus       | Boleslaw |
+|         5 | Slowacki   | Juliusz  |
++-----------+------------+----------+
+3 rows in set (0.01 sec)
+
+5.	Sprawdź, które ceny książek mają cenę wyższą niż minimalna cena książek.
+mysql> select * from ksiazki where cena> (select avg(cena) from ksiazki);
++------------+------------------+-----------+-------+-------------+-------------+
+| id_ksiazki | tytul            | id_autora | cena  | wydawnictwo | rok_wydania |
++------------+------------------+-----------+-------+-------------+-------------+
+|          2 | Ogniem i mieczem |         2 | 46.00 | Elipsa      |        1992 |
+|          3 | Nad Niemnem      |         3 | 40.00 | PWN         |        1992 |
++------------+------------------+-----------+-------+-------------+-------------+
+2 rows in set (0.00 sec)
+
+6.	Zapisz zapytanie, które zwróci numer klienta dla 3 rekordu w tabeli. Podaj nazwisko i imię klienta.
+mysql> select id_klienta, nazwisko, imie from klient where id_klienta=3;
++------------+----------+--------+
+| id_klienta | nazwisko | imie   |
++------------+----------+--------+
+|          3 | Kasprzyk | Amelia |
++------------+----------+--------+
+1 row in set (0.00 sec)
+
+7.	Odczytaj tytuły książek, których cena przekracza średnią cenę książek. 
+mysql> select tytul from ksiazki where cena> (select avg(cena) from ksiazki);
++------------------+
+| tytul            |
++------------------+
+| Ogniem i mieczem |
+| Nad Niemnem      |
++------------------+
+2 rows in set (0.00 sec)
+
+8.	Wyświetl tytuły książek, których cena jest wyższa od tytułu……..
+mysql> select tytul from ksiazki where cena>tytul='Lalka';
+Empty set, 6 warnings (0.00 sec)
+
+
+9.	Ile razem kosztują wszystkie książki każdego autora? Podaj nazwisko autora oraz kwotę, za którą można kupić wszystkie jego książki.
+mysql> select nazwisko, sum(cena)
+    -> from autor, ksiazki
+    -> where autor.id_autora=ksiazki.id_autora
+    -> group by nazwisko;
++-------------+-----------+
+| nazwisko    | sum(cena) |
++-------------+-----------+
+| Mickiewicz  |     33.00 |
+| Sienkiewicz |     46.00 |
+| Orzeszkowa  |     40.00 |
+| Prus        |     35.00 |
+| Slowacki    |     35.00 |
++-------------+-----------+
+5 rows in set (0.01 sec)
+
+10.	Podaj nazwiska i imiona oraz miejsca zamieszkania klientów, którzy zarejestrowali się w księgarni ale nie kupili żadnej książki.
+mysql> select klient.nazwisko, klient.imie, klient.miejscowosc
+    -> from klient inner join zamowienia
+    -> on klient.id_klienta=zamowienia.id_klienta
+    -> where zamowienia.data_zlozenia_zamowienia is null;
+Empty set (0.01 sec)
+
+11.	Policz numery zamówień klientów księgarni, dane pogrupuj według numerów klienta. 
+mysql> select count(id_klienta) from zamowienia group by id_klienta;
++-------------------+
+| count(id_klienta) |
++-------------------+
+|                 1 |
+|                 1 |
+|                 1 |
+|                 1 |
+|                 1 |
++-------------------+
+5 rows in set (0.00 sec)
+
+12.	Policz wydawnictwa poszczególnych autorów książek podając dane autora.
+mysql> select nazwisko, imie, count(ksiazki.wydawnictwo)
+    -> from ksiazki inner join autor
+    -> on ksiazki.id_autora=autor.id_autora
+    -> group by wydawnictwo;
++-------------+--------+----------------------------+
+| nazwisko    | imie   | count(ksiazki.wydawnictwo) |
++-------------+--------+----------------------------+
+| Mickiewicz  | Adam   |                          2 |
+| Sienkiewicz | Henryk |                          2 |
+| Orzeszkowa  | Eliza  |                          1 |
++-------------+--------+----------------------------+
+3 rows in set (0.00 sec)
+
+13.	Za pomocą instrukcji UNION wyświetl osoby, których nazwisko zaczyna się na literę B z Biłgoraja.
+
+
+14.	Uzupełnij tabelę:
+Klauzula	Użycie	Znaczenie
+ADD COLUMN		
+CHANGE COLUMN		
+DROP COLUMN		
+ADD INDEX		
+DROP INDEX		
+REANAME AS		
+
+15.	Uzupełnij dane:
+Kasowanie tabel i bazy danych: ……………………………………
+Uaktualnienie danych: ……………………………..
+Usuwanie danych:………………………………………………..
+
+16.	Utwórz tabelę pracownik zawierającą dane dotyczące:
+•	Numeru pracownika
+•	Nazwiska
+•	Imienia
+•	Stanowiska
+•	Pensji
+•	Dział
+•	Województwo 
+
+Dodaj następujące atrybuty cechy  kolumn:
+•	Klucz podstawowy dla numeru pracownika
+•	Zawartość kolumn nie może być pusta
+•	Automatyczne zwiększanie wprowadzanych rekordów
+•	Wprowadzanie wartości domyślnej dla województwa –lubelskie
+•	Wartości w kolumnie miejscowość nie mogą się powtarzać
+•	Pensja z zakresu od 2500 do 3000zł.
+
+17.	Dodaj do utworzonej tabeli kolumnę ulica typu char.
+18.	Podaj trzy rekordy do utworzonej tabeli.
+19.	Zmień nazwisko i imię pracownika w 3 rekordzie na  Nowak Jan.
+mysql> Update autor
+    -> set nazwisko='Orzeszka', imie='Ela'
+    -> where id_autora=3;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+20.	Zmień nazwiska osób na Kowalski dla rekordów o numerze powyżej 2.
+21.	Usuń osoby z województwa lubelskiego.
+mysql> delete from klient where wojewodztwo='lubelskie';
+Query OK, 1 row affected (0.01 sec)
+
+22.	Usuń osoby o nazwisku Nowak lub Kowalski.
+23.	Usuń tabelę osoba. 
